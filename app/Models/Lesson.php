@@ -12,7 +12,7 @@ class Lesson extends Model implements Sortable
     use SortableTrait;
 
 
-    protected $fillable = ['chapter_id', 'title', 'content', 'sort_order'];
+    protected $fillable = ['course_id', 'chapter_id', 'title', 'content', 'sort_order'];
 
     public $sortable = [
         'order_column_name' => 'sort_order',

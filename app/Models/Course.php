@@ -13,6 +13,11 @@ class Course extends Model
 
     public function chapters(): HasMany
     {
-        return $this->hasMany(Chapter::class);
+        return $this->hasMany(Chapter::class)->orderBy('sort_order', 'asc');
+    }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class)->orderBy('sort_order', 'asc');
     }
 }

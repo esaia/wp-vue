@@ -28,6 +28,9 @@ class LessonResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('course_id')
+                    ->relationship('course', 'title')
+                    ->required(),
                 Forms\Components\Select::make('chapter_id')
                     ->relationship('chapter', 'title')
                     ->required(),
@@ -36,10 +39,10 @@ class LessonResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Textarea::make('content')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('sort_order')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
+                // Forms\Components\TextInput::make('sort_order')
+                //     ->required()
+                //     ->numeric()
+                //     ->default(0),
             ]);
     }
 
@@ -92,8 +95,6 @@ class LessonResource extends Resource
 
                 return null;
             })
-            // ->defaultSort('chapter_id')
-            // ->defaultSort('sort_order')
             ->defaultSort(function (Builder $query): Builder {
                 return $query
                     ->orderBy('chapter_id')

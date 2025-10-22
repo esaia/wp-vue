@@ -15,6 +15,7 @@ class Chapter extends Model implements Sortable
 
     protected $fillable = ['course_id', 'title', 'content', 'sort_order'];
 
+    protected $with = ['lessons'];
 
     public $sortable = [
         'order_column_name' => 'sort_order',
@@ -29,6 +30,6 @@ class Chapter extends Model implements Sortable
 
     public function lessons(): HasMany
     {
-        return $this->hasMany(Lesson::class);
+        return $this->hasMany(Lesson::class)->orderBy('sort_order', 'asc');
     }
 }
