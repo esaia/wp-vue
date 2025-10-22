@@ -20,11 +20,6 @@ class Lesson extends Model implements Sortable
     ];
 
 
-    public function buildSortQuery()
-    {
-        return static::query()->where('chapter_id', $this->chapter_id);
-    }
-
     public function chapter(): BelongsTo
     {
         return $this->belongsTo(Chapter::class);

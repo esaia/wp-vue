@@ -79,14 +79,19 @@ class LessonResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->reorderable('sort_order')
+            // ->reorderable('sort_order')
+            ->reorderable(function (): ?string {
+                $livewire = \Livewire\Livewire::current();
+                $filters = $livewire->tableFilters ?? [];
+
+                if (isset($filters['chapter_id']['value']) && !empty($filters['chapter_id']['value'])) {
+                    return 'sort_order';
+                }
+
+                return null;
+            })
             ->defaultSort('chapter_id')
             ->defaultSort('sort_order')
-            ->modifyQueryUsing(function (Builder $query) {
-                // Group by chapter for better organization
-                return $query->orderBy('chapter_id')->orderBy('sort_order');
-            })
-
             ->groups([
                 Tables\Grouping\Group::make('chapter.sort_order')
                     ->label('Chapter')
@@ -95,9 +100,7 @@ class LessonResource extends Resource
                         fn(Lesson $record): string =>
                         $record->chapter->title
                     ),
-
-            ])
-        ;
+            ]);
     }
 
     public static function getRelations(): array
