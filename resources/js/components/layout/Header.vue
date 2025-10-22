@@ -9,7 +9,7 @@ const menu = [
 ];
 </script>
 <template>
-    <div class="w-full p-4 flex justify-between items-center">
+    <div class="flex w-full items-center justify-between p-4">
         <div>LOGO</div>
         <div class="space-x-6">
             <Link
@@ -21,8 +21,9 @@ const menu = [
                 {{ link.title }}
             </Link>
         </div>
-        <div>
-            <Button title="Get access" />
+        <div class="flex items-center gap-4">
+            <Button title="Get access" size="sm" />
+            <Button title="Log in" severity="secondary" size="sm" />
         </div>
     </div>
 </template>
