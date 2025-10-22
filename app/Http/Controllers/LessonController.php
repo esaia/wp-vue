@@ -16,10 +16,8 @@ class LessonController extends Controller
             abort(404, 'Lesson not found in this course.');
         }
 
-
         $course->load('chapters');
         $lesson->load('chapter');
-
 
         return Inertia::render('Lesson/Show', [
             'course' => $course,

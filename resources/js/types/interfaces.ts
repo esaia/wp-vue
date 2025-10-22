@@ -1,3 +1,18 @@
+import { PageProps } from "@inertiajs/core";
+
+export interface Page extends PageProps {
+    auth: { user: User };
+}
+
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at: null;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface Course {
     id: number;
     title: string;

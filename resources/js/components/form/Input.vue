@@ -87,7 +87,7 @@ const inputType = computed(() => {
             {{ desc }}
         </p>
 
-        <p v-if="error" class="mt-2 text-sm text-red-500">
+        <p v-if="error" class="mt-1 text-sm text-red-500">
             {{ error }}
         </p>
     </div>

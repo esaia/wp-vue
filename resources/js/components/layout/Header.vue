@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { Link } from "@inertiajs/vue3";
 import Button from "@/components/form/Button.vue";
-import { Course } from "@/types/interfaces";
 import { route } from "ziggy-js";
 import Modal from "@/components/common/Modal.vue";
-import LogInForm from "@/components/auth/LogInForm.vue";
-import SIgnUpForm from "@/components/auth/SIgnUpForm.vue";
 import { ref } from "vue";
+import SignInForm from "@/components/auth/SignInForm.vue";
+import SignUpForm from "@/components/auth/SignUpForm.vue";
+import { useAuth } from "@/composables/useAuth";
 
 defineProps<{
-    course: Course;
+    firstLessonRoute: string;
 }>();
 
 const menu = [
@@ -18,16 +18,18 @@ const menu = [
     { title: "FAQ", url: "/#faq" },
 ];
 
-const showLogInModal = ref(false);
+const { user } = useAuth();
+
+const showSignInModal = ref(false);
 const showSignUpModal = ref(false);
 
 const handleShowLogIn = () => {
-    showLogInModal.value = true;
+    showSignInModal.value = true;
     showSignUpModal.value = false;
 };
 
 const handleShowSignUp = () => {
-    showLogInModal.value = false;
+    showSignInModal.value = false;
     showSignUpModal.value = true;
 };
 </script>
@@ -45,29 +47,24 @@ const handleShowSignUp = () => {
             </Link>
         </div>
         <div class="flex items-center gap-4">
-            <Link
-                :href="
-                    route('lesson.show', {
-                        course: course.slug,
-                        lesson: 1,
-                    })
-                "
-            >
-                <Button title="Get access" size="sm" />
+            <Link :href="firstLessonRoute">
+                <Button title="Open course" size="sm" />
             </Link>
+
             <Button
-                title="Log in"
+                v-if="!user"
+                title="Sign in"
                 severity="secondary"
                 size="sm"
-                @click="showSignUpModal = true"
+                @click="showSignInModal = true"
             />
         </div>
     </div>
 
     <Teleport to="body">
         <Transition name="fade">
-            <Modal v-if="showLogInModal" @close="showLogInModal = false">
-                <LogInForm />
+            <Modal v-if="showSignInModal" @close="showSignInModal = false">
+                <SignInForm />
                 <template #modal-bottom>
                     <div class="mt-2 flex w-full justify-center gap-4">
                         <Link class="hover:underline"> Forgot password? </Link>
@@ -82,7 +79,7 @@ const handleShowSignUp = () => {
             </Modal>
 
             <Modal v-else-if="showSignUpModal" @close="showSignUpModal = false">
-                <SIgnUpForm />
+                <SignUpForm />
                 <template #modal-bottom>
                     <div class="mt-2 flex w-full justify-center gap-4">
                         <Link class="hover:underline"> Forgot password? </Link>
@@ -90,7 +87,7 @@ const handleShowSignUp = () => {
                             class="cursor-pointer hover:underline"
                             @click="handleShowLogIn"
                         >
-                            Log in
+                            Sign in
                         </span>
                     </div>
                 </template>

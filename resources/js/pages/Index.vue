@@ -1,29 +1,25 @@
 <script setup lang="ts">
 import Header from "@/components/layout/Header.vue";
+import { useAuth } from "@/composables/useAuth";
 import { Course } from "@/types/interfaces";
-import { usePage } from "@inertiajs/vue3";
-import { computed } from "vue";
 
 defineProps<{
-    course: Course;
+    firstLessonRoute: string;
 }>();
 
-const page = usePage();
-
-const user = computed(() => page.props.auth.user);
+const { user } = useAuth();
 </script>
 
 <template>
     <div class="container-fluid mx-auto min-h-screen">
-        <Header :course="course" />
+        <Header :first-lesson-route="firstLessonRoute" />
 
         <pre>
-
             {{ user }}
         </pre>
         <pre>
 
-            {{ course }}
+            {{ firstLessonRoute }}
         </pre>
     </div>
 </template>

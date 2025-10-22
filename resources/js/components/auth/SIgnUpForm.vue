@@ -52,6 +52,8 @@ const getError = (field: string) => {
 };
 
 const handleSubmitForm = async () => {
+    error.value = "";
+
     await v$.value.$validate();
 
     if (v$.value.$error || form.processing) return;
@@ -70,7 +72,9 @@ const handleSubmitForm = async () => {
             class="flex flex-col space-y-5"
             @submit.prevent="handleSubmitForm"
         >
-            <h5 class="border-b-2 border-gray-300 pb-8 text-4xl">Sign up</h5>
+            <h5 class="border-b-2 border-gray-300 pb-8 text-4xl font-bold">
+                Sign up
+            </h5>
 
             <Input
                 v-model="form.name"
