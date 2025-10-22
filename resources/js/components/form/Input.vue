@@ -47,7 +47,7 @@ const inputType = computed(() => {
 </script>
 
 <template>
-    <div class="w-full cursor-auto!">
+    <label class="w-full cursor-auto!">
         <p v-if="label" class="mb-2 text-sm">
             {{ label }} <span v-if="required" class="text-red-600">*</span>
         </p>
@@ -93,5 +93,5 @@ const inputType = computed(() => {
         <p v-if="error" class="mt-1 text-sm text-red-500">
             {{ error }}
         </p>
-    </div>
+    </label>
 </template>

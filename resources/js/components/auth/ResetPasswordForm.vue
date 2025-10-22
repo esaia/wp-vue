@@ -91,7 +91,7 @@ const handleSubmitForm = async () => {
             <Input
                 v-model="form.email"
                 type="email"
-                placeholder="Email"
+                placeholder="john@example.com"
                 label="Email"
                 disabled
                 :error="getError('email')"

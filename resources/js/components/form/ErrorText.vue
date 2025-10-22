@@ -7,10 +7,12 @@ defineProps<{
 </script>
 
 <template>
-    <div v-if="error" class="flex gap-2 text-sm text-red-500">
-        <ErrorIcon class="size-5 fill-red-500" />
-        <p>
-            {{ error }}
-        </p>
+    <div class="mb-2 min-h-5">
+        <div v-if="error" class="flex gap-2 text-sm text-red-500">
+            <ErrorIcon class="size-5 min-w-5 fill-red-500" />
+            <p>
+                {{ error }}
+            </p>
+        </div>
     </div>
 </template>

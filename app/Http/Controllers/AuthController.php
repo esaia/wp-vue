@@ -20,10 +20,7 @@ class AuthController extends Controller
 
         User::create($validated);
 
-        return redirect()->route('lesson.show', [
-            'course' => 'WordPress-Plugin-Development-with-Vue-js',
-            'lesson' => 1,
-        ]);
+        return redirect()->back();
     }
 
 

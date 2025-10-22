@@ -25,12 +25,12 @@ onUnmounted(() => {
 </script>
 <template>
     <div
-        class="font-bpg_le_studio fixed top-0 left-0 z-30 flex h-full w-full items-center justify-center bg-black/30 px-4 backdrop-blur-xs lg:px-10"
+        class="font-bpg_le_studio fixed top-0 left-0 z-30 flex h-full w-full items-center justify-center bg-black/10 px-4 backdrop-blur-xs lg:px-10"
         @click="emit('close')"
     >
         <div class="relative w-full max-w-[500px] rounded-md" @click.stop="">
             <div
-                class="h-full max-h-[calc(100svh-50px)] w-full overflow-auto bg-white p-4"
+                class="h-full max-h-[calc(100svh-50px)] w-full overflow-auto rounded-sm bg-white p-4"
                 ref="slotContainer"
             >
                 <slot />
@@ -43,7 +43,7 @@ onUnmounted(() => {
                 class="absolute top-2 right-2 cursor-pointer rounded-full p-2 duration-300"
                 @click="emit('close')"
             >
-                <Button title="X" />
+                <Button title="X" size="sm" />
             </div>
         </div>
     </div>

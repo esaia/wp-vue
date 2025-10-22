@@ -8,7 +8,7 @@ defineProps<{
 </script>
 <template>
     <form
-        class="flex flex-col space-y-5"
+        class="flex flex-col space-y-5 md:px-8 md:py-2"
         @submit.prevent="emit('handleSubmit')"
     >
         <h5 class="border-b-2 border-gray-300 pb-8 text-4xl font-bold">

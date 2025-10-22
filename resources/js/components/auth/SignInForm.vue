@@ -63,28 +63,31 @@ const handleSubmitForm = async () => {
         <Input
             v-model="form.email"
             type="email"
-            placeholder="Email"
+            placeholder="john@example.com"
             label="Email"
             :error="getError('email')"
         />
 
         <Input
             v-model="form.password"
-            type="text"
-            placeholder="Password"
+            type="password"
+            placeholder="Enter Password"
             label="Password"
             :error="getError('password')"
         />
 
-        <ErrorText :error="error" />
+        <div>
+            <ErrorText :error="error" />
 
-        <div class="flex gap-3">
-            <Button
-                title="Sign in"
-                severity="secondary"
-                class="w-fit"
-                :loading="form.processing"
-            />
+            <div class="flex gap-3">
+                <Button
+                    title="Sign in"
+                    severity="secondary"
+                    class="w-fit"
+                    size="sm"
+                    :loading="form.processing"
+                />
+            </div>
         </div>
     </AuthModalLayout>
 </template>

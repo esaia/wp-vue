@@ -10,9 +10,9 @@ import ErrorText from "@/components/form/ErrorText.vue";
 import AuthModalLayout from "@/components/layout/AuthModalLayout.vue";
 import {
     EMAIL_MSG,
-    LOGIN_ERROR,
     PASSWORD_MATCH_MSG,
     REQUIRED_MSG,
+    SERVER_ERROR,
 } from "@/composables/constants";
 
 const emit = defineEmits<{
@@ -65,7 +65,7 @@ const handleSubmitForm = async () => {
 
     form.post(route("signup"), {
         onError: (err) => {
-            error.value = Object.values(err)?.[0] || LOGIN_ERROR;
+            error.value = Object.values(err)?.[0] || SERVER_ERROR;
         },
         onSuccess: () => emit("registered"),
     });
@@ -76,7 +76,7 @@ const handleSubmitForm = async () => {
         <Input
             v-model="form.name"
             type="text"
-            placeholder="Username"
+            placeholder="JohnDoe"
             label="Username"
             :error="getError('name')"
         />
@@ -84,7 +84,7 @@ const handleSubmitForm = async () => {
         <Input
             v-model="form.email"
             type="email"
-            placeholder="Email"
+            placeholder="john@example.com"
             label="Email"
             :error="getError('email')"
         />
@@ -92,7 +92,7 @@ const handleSubmitForm = async () => {
         <Input
             v-model="form.password"
             type="password"
-            placeholder="Password"
+            placeholder="Enter Password"
             label="Password"
             :error="getError('password')"
         />
@@ -100,20 +100,23 @@ const handleSubmitForm = async () => {
         <Input
             v-model="form.confirmPassword"
             type="password"
-            placeholder=""
+            placeholder="Repeat Password"
             label="Repeat password"
             :error="getError('confirmPassword')"
         />
 
-        <ErrorText :error="error" />
+        <div>
+            <ErrorText :error="error" />
 
-        <div class="flex gap-3">
-            <Button
-                title="Sign up"
-                severity="secondary"
-                class="w-fit"
-                :loading="form.processing"
-            />
+            <div class="flex gap-3">
+                <Button
+                    title="Sign up"
+                    severity="secondary"
+                    class="w-fit"
+                    size="sm"
+                    :loading="form.processing"
+                />
+            </div>
         </div>
     </AuthModalLayout>
 </template>

@@ -31,10 +31,11 @@ const handleLogout = () => {
 };
 </script>
 <template>
-    <div
-        class="x flex min-h-[calc(100vh-64px)] max-w-[270px] flex-col justify-between border-r"
-    >
-        <div class="flex-1 overflow-y-auto p-6">
+    <div class="flex max-w-[270px] flex-col justify-between border-r">
+        <div
+            class="h-[calc(100vh-64px-80px)] overflow-y-auto p-6"
+            :class="{ 'h-[calc(100vh-64px)]!': !user }"
+        >
             <div v-for="chapter in course.chapters" :key="chapter.id">
                 <h4>{{ chapter.title }} ({{ chapter.lessons.length }})</h4>
 

@@ -3,7 +3,7 @@ import Input from "@/components/form/Input.vue";
 import { computed, ref } from "vue";
 import Button from "@/components/form/Button.vue";
 import { useForm } from "@inertiajs/vue3";
-import { EMAIL_MSG, LOGIN_ERROR, REQUIRED_MSG } from "@/composables/constants";
+import { EMAIL_MSG, REQUIRED_MSG, SERVER_ERROR } from "@/composables/constants";
 import { email, helpers, required } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import { route } from "ziggy-js";
@@ -50,7 +50,7 @@ const handleSubmitForm = async () => {
 
     form.post(route("password.email"), {
         onError: (err) => {
-            error.value = Object.values(err)?.[0] || LOGIN_ERROR;
+            error.value = Object.values(err)?.[0] || SERVER_ERROR;
         },
         onSuccess: (data) => {
             isSuccess.value = true;
@@ -69,24 +69,27 @@ const handleSubmitForm = async () => {
             :teaser="`A password reset link has been sent to your email. Please check your inbox (and spam folder) to reset your password. (${form.email})`"
         />
 
-        <div v-else class="space-y-5">
+        <div v-else class="flex flex-col gap-5">
             <Input
                 v-model="form.email"
                 type="email"
-                placeholder="Email"
+                placeholder="john@example.com"
                 label="Email"
                 :error="getError('email')"
             />
 
-            <ErrorText :error="error" />
+            <div>
+                <ErrorText :error="error" />
 
-            <div class="flex gap-3">
-                <Button
-                    title="Send link"
-                    severity="secondary"
-                    class="w-fit"
-                    :loading="form.processing"
-                />
+                <div class="flex gap-3">
+                    <Button
+                        title="Send link"
+                        severity="secondary"
+                        class="w-fit"
+                        size="sm"
+                        :loading="form.processing"
+                    />
+                </div>
             </div>
         </div>
     </AuthModalLayout>
