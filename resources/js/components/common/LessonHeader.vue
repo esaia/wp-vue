@@ -16,7 +16,7 @@ defineProps<{
             <span>/</span>
             <div>{{ course.title }}</div>
             <span>/</span>
-            <div>{{ currentLesson.id }}</div>
+            <div>{{ currentLesson.title }}</div>
         </div>
 
         <Link :href="route('home')">

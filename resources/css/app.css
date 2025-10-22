@@ -12,3 +12,23 @@
 @theme {
     --color-primary: var(--color-amber-300);
 }
+
+/* Fade transition styles */
+.fade-enter-active,
+.fade-leave-active {
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    /* transform: translateY(10px); Optional slight vertical movement */
+}
+
+.fade-enter-to,
+.fade-leave-from {
+    opacity: 1;
+    /* transform: translateY(0); */
+}

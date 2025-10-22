@@ -16,14 +16,9 @@ defineProps<{
         <div class="bg-primary-500 flex">
             <LessonsSidebar :course="course" :current-lesson="currentLesson" />
 
-            <div class="mx-auto flex w-full justify-center px-4 md:px-14">
+            <div class="mx-auto flex w-full justify-center p-4 md:px-14">
                 <div class="w-full max-w-[1500px]">
-                    <h1 class="mb-4 text-3xl font-bold">{{ course.title }}</h1>
-                    <h2 class="mb-2 text-xl font-semibold">
-                        Chapter: {{ currentLesson.chapter.title }}
-                    </h2>
-
-                    <h4>Lesson: {{ currentLesson.title }}</h4>
+                    <h1 class="text-3xl">{{ currentLesson.title }}</h1>
                 </div>
             </div>
         </div>
