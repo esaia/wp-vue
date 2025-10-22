@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { Link } from "@inertiajs/vue3";
 import Button from "@/components/form/Button.vue";
-import { route } from "ziggy-js";
-import Modal from "@/components/common/Modal.vue";
-import { ref } from "vue";
-import SignInForm from "@/components/auth/SignInForm.vue";
-import SignUpForm from "@/components/auth/SignUpForm.vue";
 import { useAuth } from "@/composables/useAuth";
+import AuthModals from "@/components/auth/AuthModals.vue";
+import { ref } from "vue";
 
 defineProps<{
     firstLessonRoute: string;
@@ -21,17 +18,6 @@ const menu = [
 const { user } = useAuth();
 
 const showSignInModal = ref(false);
-const showSignUpModal = ref(false);
-
-const handleShowLogIn = () => {
-    showSignInModal.value = true;
-    showSignUpModal.value = false;
-};
-
-const handleShowSignUp = () => {
-    showSignInModal.value = false;
-    showSignUpModal.value = true;
-};
 </script>
 <template>
     <div class="flex w-full items-center justify-between p-4">
@@ -59,39 +45,7 @@ const handleShowSignUp = () => {
                 @click="showSignInModal = true"
             />
         </div>
+
+        <AuthModals v-model:show-sign-in-modal="showSignInModal" />
     </div>
-
-    <Teleport to="body">
-        <Transition name="fade">
-            <Modal v-if="showSignInModal" @close="showSignInModal = false">
-                <SignInForm />
-                <template #modal-bottom>
-                    <div class="mt-2 flex w-full justify-center gap-4">
-                        <Link class="hover:underline"> Forgot password? </Link>
-                        <span
-                            class="cursor-pointer hover:underline"
-                            @click="handleShowSignUp"
-                        >
-                            Sign up
-                        </span>
-                    </div>
-                </template>
-            </Modal>
-
-            <Modal v-else-if="showSignUpModal" @close="showSignUpModal = false">
-                <SignUpForm />
-                <template #modal-bottom>
-                    <div class="mt-2 flex w-full justify-center gap-4">
-                        <Link class="hover:underline"> Forgot password? </Link>
-                        <span
-                            class="cursor-pointer hover:underline"
-                            @click="handleShowLogIn"
-                        >
-                            Sign in
-                        </span>
-                    </div>
-                </template>
-            </Modal>
-        </Transition>
-    </Teleport>
 </template>

@@ -2,17 +2,16 @@
 import Input from "@/components/form/Input.vue";
 import { computed, ref } from "vue";
 import Button from "@/components/form/Button.vue";
-import { router, useForm } from "@inertiajs/vue3";
-import {
-    EMAIL_MSG,
-    LOGIN_ERROR,
-    PASSWORD_MATCH_MSG,
-    REQUIRED_MSG,
-} from "@/composables/constants";
-import { email, helpers, required, sameAs } from "@vuelidate/validators";
+import { useForm } from "@inertiajs/vue3";
+import { EMAIL_MSG, LOGIN_ERROR, REQUIRED_MSG } from "@/composables/constants";
+import { email, helpers, required } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import { route } from "ziggy-js";
 import ErrorText from "@/components/form/ErrorText.vue";
+
+const emit = defineEmits<{
+    (e: "loggedIn"): void;
+}>();
 
 const form = useForm({
     email: "asgnj@asg.sfg",
@@ -51,6 +50,9 @@ const handleSubmitForm = async () => {
     form.post(route("login"), {
         onError: (err) => {
             error.value = Object.values(err)?.[0] || LOGIN_ERROR;
+        },
+        onStart: () => {
+            emit("loggedIn");
         },
     });
 };

@@ -14,6 +14,10 @@ import useVuelidate from "@vuelidate/core";
 import { route } from "ziggy-js";
 import ErrorText from "@/components/form/ErrorText.vue";
 
+const emit = defineEmits<{
+    (e: "registered"): void;
+}>();
+
 const form = useForm({
     name: "sagsag",
     email: "asgnj@asg.sfg",
@@ -62,7 +66,7 @@ const handleSubmitForm = async () => {
         onError: (err) => {
             error.value = Object.values(err)?.[0] || LOGIN_ERROR;
         },
-        onSuccess: () => router.visit("/"),
+        onSuccess: () => emit("registered"),
     });
 };
 </script>
