@@ -19,6 +19,12 @@ class CourseResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form

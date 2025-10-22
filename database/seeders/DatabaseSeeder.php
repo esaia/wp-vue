@@ -21,8 +21,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => '123456Aa',
         ]);
 
 
@@ -38,35 +39,41 @@ class DatabaseSeeder extends Seeder
             'course_id' => $course->id,
             'title' => 'Introduction to WordPress Plugins',
             'content' => 'Overview of plugin development.',
-            'order' => 1,
         ]);
 
         Lesson::create([
+            'course_id' => $course->id,
             'chapter_id' => $chapter->id,
             'title' => 'What is a WordPress Plugin?',
             'content' => 'Understanding the basics of plugins.',
-            'order' => 1,
         ]);
 
         Lesson::create([
+            'course_id' => $course->id,
             'chapter_id' => $chapter->id,
             'title' => 'Setting Up Your Development Environment',
             'content' => 'Tools and setup for plugin development.',
-            'order' => 2,
         ]);
 
         $chapter2 = Chapter::create([
             'course_id' => $course->id,
             'title' => 'Setting Up Vue.js in WordPress',
             'content' => 'Integrating Vue.js with WordPress.',
-            'order' => 2,
         ]);
 
         Lesson::create([
+            'course_id' => $course->id,
             'chapter_id' => $chapter2->id,
-            'title' => 'Introduction to Vue.js',
+            'title' => 'Introduction to Vue.js 1',
             'content' => 'Basics of Vue.js for WordPress.',
-            'order' => 1,
+        ]);
+
+
+        Lesson::create([
+            'course_id' => $course->id,
+            'chapter_id' => $chapter2->id,
+            'title' => 'Introduction to Vue.js 2',
+            'content' => 'Basics of Vue.js for WordPress.',
         ]);
     }
 }

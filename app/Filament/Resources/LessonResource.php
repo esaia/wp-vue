@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ChapterResource\Pages;
-use App\Filament\Resources\ChapterResource\RelationManagers;
-use App\Models\Chapter;
+use App\Filament\Resources\LessonResource\Pages;
+use App\Filament\Resources\LessonResource\RelationManagers;
+use App\Models\Lesson;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,23 +13,23 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ChapterResource extends Resource
+class LessonResource extends Resource
 {
-    protected static ?string $model = Chapter::class;
+    protected static ?string $model = Lesson::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationSort(): ?int
     {
-        return 2;
+        return 3;
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('course_id')
-                    ->relationship('course', 'title')
+                Forms\Components\Select::make('chapter_id')
+                    ->relationship('chapter', 'title')
                     ->required(),
                 Forms\Components\TextInput::make('title')
                     ->required()
@@ -47,10 +47,10 @@ class ChapterResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('course.title')
+                Tables\Columns\TextColumn::make('chapter.title')
+                    ->badge()
                     ->numeric()
-                    ->sortable()
-                    ->badge(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sort_order')
@@ -63,13 +63,13 @@ class ChapterResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
             ])
             ->filters([
                 //
-                Tables\Filters\SelectFilter::make('course_id')
-                    ->relationship('course', 'title')
-                    ->label('Course'),
+                Tables\Filters\SelectFilter::make('chapter_id')
+                    ->relationship('chapter', 'title')
+                    ->label('Chapter'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -80,7 +80,24 @@ class ChapterResource extends Resource
                 ]),
             ])
             ->reorderable('sort_order')
-            ->defaultSort('sort_order');;
+            ->defaultSort('chapter_id')
+            ->defaultSort('sort_order')
+            ->modifyQueryUsing(function (Builder $query) {
+                // Group by chapter for better organization
+                return $query->orderBy('chapter_id')->orderBy('sort_order');
+            })
+
+            ->groups([
+                Tables\Grouping\Group::make('chapter.sort_order')
+                    ->label('Chapter')
+                    ->collapsible()
+                    ->getTitleFromRecordUsing(
+                        fn(Lesson $record): string =>
+                        $record->chapter->title
+                    ),
+
+            ])
+        ;
     }
 
     public static function getRelations(): array
@@ -93,9 +110,9 @@ class ChapterResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListChapters::route('/'),
-            'create' => Pages\CreateChapter::route('/create'),
-            'edit' => Pages\EditChapter::route('/{record}/edit'),
+            'index' => Pages\ListLessons::route('/'),
+            'create' => Pages\CreateLesson::route('/create'),
+            'edit' => Pages\EditLesson::route('/{record}/edit'),
         ];
     }
 }
