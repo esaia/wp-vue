@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { Link } from "@inertiajs/vue3";
 import Button from "@/components/form/Button.vue";
+import { Course } from "@/types/interfaces";
+import { route } from "ziggy-js";
+
+defineProps<{
+    course: Course;
+}>();
 
 const menu = [
     { title: "Reviews", url: "/#reviews" },
@@ -22,7 +28,16 @@ const menu = [
             </Link>
         </div>
         <div class="flex items-center gap-4">
-            <Button title="Get access" size="sm" />
+            <Link
+                :href="
+                    route('lesson.show', {
+                        course: course.slug,
+                        lesson: 1,
+                    })
+                "
+            >
+                <Button title="Get access" size="sm" />
+            </Link>
             <Button title="Log in" severity="secondary" size="sm" />
         </div>
     </div>
