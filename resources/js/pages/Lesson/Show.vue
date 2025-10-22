@@ -1,37 +1,31 @@
 <script setup lang="ts">
-import Button from "@/components/form/Button.vue";
-import { Course } from "@/types/interfaces";
-import { Link } from "@inertiajs/vue3";
-import { route } from "ziggy-js";
+import LessonHeader from "@/components/common/LessonHeader.vue";
+import LessonsSidebar from "@/components/common/LessonsSidebar.vue";
+import { Course, Lesson } from "@/types/interfaces";
 
-const props = defineProps<{
+defineProps<{
     course: Course;
-    currentLesson: any;
+    currentLesson: Lesson;
 }>();
-
-console.log("props", props);
 </script>
 
 <template>
-    <div class="container mx-auto p-4">
-        <div v-for="chapter in course.chapters">
-            {{ chapter.title }}
+    <div class="mx-auto min-h-screen">
+        <LessonHeader :course="course" :current-lesson="currentLesson" />
 
-            <div v-for="lesson in chapter.lessons">
-                {{ lesson.id }} - {{ lesson.title }}
+        <div class="bg-primary-500 flex">
+            <LessonsSidebar :course="course" :current-lesson="currentLesson" />
+
+            <div class="mx-auto flex w-full justify-center px-4 md:px-14">
+                <div class="w-full max-w-[1500px]">
+                    <h1 class="mb-4 text-3xl font-bold">{{ course.title }}</h1>
+                    <h2 class="mb-2 text-xl font-semibold">
+                        Chapter: {{ currentLesson.chapter.title }}
+                    </h2>
+
+                    <h4>Lesson: {{ currentLesson.title }}</h4>
+                </div>
             </div>
         </div>
-        <h1 class="mb-4 text-3xl font-bold">{{ course.title }}</h1>
-        <h2 class="mb-2 text-xl font-semibold">
-            Chapter: {{ currentLesson.chapter.title }}
-        </h2>
-        <h3 class="mb-4 text-lg font-medium">
-            Lesson: {{ currentLesson.title }}
-        </h3>
-        <div class="prose max-w-none" v-html="currentLesson.content"></div>
-
-        <Link :href="route('home')">
-            <Button title="Go back" size="sm" />
-        </Link>
     </div>
 </template>

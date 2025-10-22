@@ -8,3 +8,7 @@
 .container-fluid {
     @apply container max-w-screen-2xl;
 }
+
+@theme {
+    --color-primary: var(--color-amber-300);
+}
