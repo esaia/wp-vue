@@ -54,11 +54,14 @@ const inputType = computed(() => {
 
         <div
             class="input-wrapper flex items-center rounded-md ring-1 ring-gray-700 transition-all focus-within:ring-2 focus-within:ring-black/70! hover:ring-gray-500"
-            :class="{ 'ring-red-500! focus-within:ring-red-500!': error }"
+            :class="{
+                'ring-red-500! focus-within:ring-red-500!': error,
+                'ring-gray-400!': disabled,
+            }"
         >
             <input
                 v-model="inputModel"
-                class="focus:shadow-none!tex h-full max-h-max w-full! border-none! bg-transparent px-2 py-3 text-sm outline-none placeholder:text-gray-500 focus:border-none!"
+                class="h-full max-h-max w-full! border-none! bg-transparent px-2 py-3 text-sm outline-none placeholder:text-gray-500 focus:border-none! focus:shadow-none! disabled:text-gray-400"
                 :placeholder="placeholder"
                 :type="inputType"
                 :name="placeholder"

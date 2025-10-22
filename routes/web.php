@@ -14,6 +14,7 @@ Route::get('/', function () {
         'lesson' => $course->chapters[0]->lessons[0]->id
     ]);
 
+
     return Inertia::render('Index', compact('firstLessonRoute'));
 })->name('home');
 
@@ -23,9 +24,16 @@ Route::get('/{course:slug}/lesson/{lesson}', [LessonController::class, 'show'])
     ->name('lesson.show');
 
 
+Route::controller(AuthController::class)->group(function () {
+    // Authentication
+    Route::post('/login', 'login')->name('login');
+    Route::post('/signup', 'register')->name('signup');
+    Route::post('/logout', 'destroy')->name('logout');
 
-Route::prefix('auth')->group(function () {
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/signup', [AuthController::class, 'register'])->name('signup');
-    Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+    // Password reset
+    Route::name('password.')->group(function () {
+        Route::post('/password/forgot', 'sendResetLinkEmail')->name('email');
+        Route::get('/password/reset/{token}', 'showResetPasswordForm')->name('reset');
+        Route::post('/password/reset', 'resetPassword')->name('update');
+    });
 });

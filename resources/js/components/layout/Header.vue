@@ -4,6 +4,7 @@ import Button from "@/components/form/Button.vue";
 import { useAuth } from "@/composables/useAuth";
 import AuthModals from "@/components/auth/AuthModals.vue";
 import { ref } from "vue";
+import { AuthModalNames } from "@/types/interfaces";
 
 defineProps<{
     firstLessonRoute: string;
@@ -17,7 +18,7 @@ const menu = [
 
 const { user } = useAuth();
 
-const showSignInModal = ref(false);
+const modalName = ref<AuthModalNames>("");
 </script>
 <template>
     <div class="flex w-full items-center justify-between p-4">
@@ -42,10 +43,10 @@ const showSignInModal = ref(false);
                 title="Sign in"
                 severity="secondary"
                 size="sm"
-                @click="showSignInModal = true"
+                @click="modalName = 'signIn'"
             />
         </div>
 
-        <AuthModals v-model:show-sign-in-modal="showSignInModal" />
+        <AuthModals v-model:modal-name="modalName" />
     </div>
 </template>

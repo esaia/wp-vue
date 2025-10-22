@@ -4,6 +4,8 @@ export interface Page extends PageProps {
     auth: { user: User };
 }
 
+export type AuthModalNames = "signIn" | "signUp" | "forgot" | "";
+
 interface User {
     id: number;
     name: string;
