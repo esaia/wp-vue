@@ -59,7 +59,7 @@ const handleShowSignUp = () => {
                 title="Log in"
                 severity="secondary"
                 size="sm"
-                @click="showLogInModal = true"
+                @click="showSignUpModal = true"
             />
         </div>
     </div>

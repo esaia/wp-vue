@@ -54,7 +54,7 @@ const inputType = computed(() => {
 
         <div
             class="input-wrapper flex items-center rounded-md ring-1 ring-gray-700 transition-all focus-within:ring-2 focus-within:ring-black/70! hover:ring-gray-500"
-            :class="{ 'ring-red-500!': error }"
+            :class="{ 'ring-red-500! focus-within:ring-red-500!': error }"
         >
             <input
                 v-model="inputModel"
@@ -87,7 +87,7 @@ const inputType = computed(() => {
             {{ desc }}
         </p>
 
-        <p v-if="error">
+        <p v-if="error" class="mt-2 text-sm text-red-500">
             {{ error }}
         </p>
     </div>

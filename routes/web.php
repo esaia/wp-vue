@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LessonController;
 use App\Models\Course;
 use Illuminate\Support\Facades\Route;
@@ -15,3 +16,5 @@ Route::get('/', function () {
 
 Route::get('/{course:slug}/lesson/{lesson}', [LessonController::class, 'show'])
     ->name('lesson.show');
+
+Route::post('/signup', [AuthController::class, 'register'])->name('signup');
