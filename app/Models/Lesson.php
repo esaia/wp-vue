@@ -24,4 +24,10 @@ class Lesson extends Model implements Sortable
     {
         return $this->belongsTo(Chapter::class);
     }
+
+
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

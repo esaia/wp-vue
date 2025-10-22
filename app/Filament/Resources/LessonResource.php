@@ -49,27 +49,29 @@ class LessonResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('chapter.title')
                     ->badge()
-                    ->numeric()
-                    ->sortable(),
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sort_order')
-                    ->numeric()
-                    ->sortable(),
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
             ])
             ->filters([
                 //
+
+                Tables\Filters\SelectFilter::make('course_id')
+                    ->relationship('course', 'title')
+                    ->label('Course'),
+
                 Tables\Filters\SelectFilter::make('chapter_id')
                     ->relationship('chapter', 'title')
                     ->label('Chapter'),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -90,8 +92,13 @@ class LessonResource extends Resource
 
                 return null;
             })
-            ->defaultSort('chapter_id')
-            ->defaultSort('sort_order')
+            // ->defaultSort('chapter_id')
+            // ->defaultSort('sort_order')
+            ->defaultSort(function (Builder $query): Builder {
+                return $query
+                    ->orderBy('chapter_id')
+                    ->orderBy('sort_order');
+            })
             ->groups([
                 Tables\Grouping\Group::make('chapter.sort_order')
                     ->label('Chapter')

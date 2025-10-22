@@ -17,7 +17,7 @@ class ChapterResource extends Resource
 {
     protected static ?string $model = Chapter::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     public static function getNavigationSort(): ?int
     {
@@ -49,20 +49,16 @@ class ChapterResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('course.title')
                     ->numeric()
-                    ->sortable()
                     ->badge(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sort_order')
-                    ->numeric()
-                    ->sortable(),
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
@@ -79,8 +75,18 @@ class ChapterResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->reorderable('sort_order')
-            ->defaultSort('sort_order');;
+            // ->reorderable('sort_order')
+            ->reorderable(function (): ?string {
+                $livewire = \Livewire\Livewire::current();
+                $filters = $livewire->tableFilters ?? [];
+
+                if (isset($filters['course_id']['value']) && !empty($filters['course_id']['value'])) {
+                    return 'sort_order';
+                }
+
+                return null;
+            })
+            ->defaultSort('sort_order');
     }
 
     public static function getRelations(): array
