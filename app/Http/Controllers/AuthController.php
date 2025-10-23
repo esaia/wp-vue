@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Inertia\Inertia;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
 
 class AuthController extends Controller
 {
@@ -112,12 +113,31 @@ class AuthController extends Controller
                     // 'remember_token' => Str::random(60),
                 ])->save();
 
-                // event(new PasswordReset($user));
+                event(new PasswordReset($user));
             }
         );
 
         return $status === Password::PASSWORD_RESET
             ? back()->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
+    }
+
+
+    public function verificationVerify($id, $hash)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('home')->with('status', 'Your email is already verified.');
+        }
+
+        if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+            return redirect()->route('home')->withErrors(['email' => 'Invalid verification link.']);
+        }
+
+        $user->markEmailAsVerified();
+        event(new Verified($user));
+
+        return redirect()->route('home', ['success' => 'email_verified'])->with('status', 'Email verified successfully!');
     }
 }
