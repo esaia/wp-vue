@@ -5,15 +5,17 @@ import VueIcon from "@/components/icons/VueIcon.vue";
 import WordPressIcon from "@/components/icons/WordPressIcon.vue";
 
 const features = [
-    "12 hours of video content (215 short lessons)",
-    "Support from our instructor",
+    "6 hours of video content",
+    "Support from instructor",
     "Private Discord community",
     "Lifetime updates",
 ];
 </script>
 <template>
-    <div id="pricing" class="container-fluid pt-20">
-        <p class="title-md mb-6 text-center">Build your WP plugin today</p>
+    <div id="pricing" class="container-fluid pt-32">
+        <p class="title-md mb-10 text-center">
+            Build your WordPress plugin today
+        </p>
 
         <div class="flex items-center justify-center">
             <div
@@ -37,11 +39,11 @@ const features = [
                 </div>
 
                 <div class="flex items-end gap-3">
-                    <span class="text-gray-400 line-through">$648 </span>
+                    <span class="text-gray-400 line-through">$199 </span>
                     <span
                         class="text-5xl font-extrabold tracking-tight text-gray-100"
                     >
-                        $299
+                        $59
                     </span>
                     <span class="text-sm font-bold text-gray-400">USD</span>
                 </div>

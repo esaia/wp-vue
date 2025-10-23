@@ -32,7 +32,7 @@ const toggleItem = (index: number) => {
 };
 </script>
 <template>
-    <div id="faq" class="container-fluid pt-20">
+    <div id="faq" class="container-fluid pt-32">
         <h3 class="title-md text-center">Frequently Asked Questions</h3>
 
         <div class="mt-10 flex flex-col items-center justify-center">

@@ -15,7 +15,8 @@
                 <a href="http://www.ireplugin.com" target="_blank">
                     WordPress plugin
                 </a>
-                that generates passive income.
+                that generates passive income. And decided to share my knowledge
+                and experience for you.
             </p>
 
             <a href="http://www.ireplugin.com" target="_blank" class="block">
@@ -40,7 +41,8 @@
                 <a
                     href="https://wordpress.org/plugins/interactive-real-estate/"
                     target="_blank"
-                    >official WordPress repository.
+                >
+                    official WordPress repository.
                 </a>
                 That's the <span> power</span> of WordPress. It has very large
                 community.
@@ -65,11 +67,18 @@
             <p>
                 While building my plugin, I realized there was plenty of
                 information on how to use WordPress and its plugins, but very
-                little on how to actually create them. That's why I build this
+                little on how to actually create them. That's why I made this
                 course.
             </p>
 
             <p>Don't wait—start learning today!</p>
+
+            <p>Because after this course, you will say:</p>
+
+            <img
+                src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWg0OWxsZWV1cm4xNHk1dXlvZ3o0dnIxaGlmYWx0Ynd0ZHo0dzU1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i21tixUQEE7TEqwmYa/giphy.gif"
+                class="mx-auto shadow"
+            />
         </div>
     </div>
 </template>

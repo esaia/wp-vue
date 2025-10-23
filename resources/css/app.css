@@ -14,7 +14,7 @@ html {
 }
 
 .title-md {
-    @apply text-4xl font-black;
+    @apply text-4xl font-bold;
 }
 
 .shadow {

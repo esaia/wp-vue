@@ -39,10 +39,12 @@ const DATA = [
     <div class="container-fluid mt-20">
         <div class="flex items-center justify-center gap-2">
             <h3 class="title-md">Why <span class="text-vue">Vue.js?</span></h3>
-            <VueIcon class="size-20" />
+            <VueIcon class="hidden size-12 md:block" />
         </div>
 
-        <div class="mx-auto mt-10 grid max-w-7xl grid-cols-2 gap-10 text-left">
+        <div
+            class="mx-auto mt-10 grid max-w-7xl grid-cols-1 gap-10 text-left md:grid-cols-2"
+        >
             <div v-for="item in DATA">
                 <p class="mb-2 text-lg font-semibold">{{ item.title }}</p>
 
@@ -60,7 +62,7 @@ const DATA = [
                 <h3 class="title-md">
                     Why <span class="text-wp">WordPress?</span>
                 </h3>
-                <WordPressIcon class="size-20" />
+                <WordPressIcon class="hidden size-12 md:block" />
             </div>
             <p class="text-center text-xl">
                 WordPress powers approximately
