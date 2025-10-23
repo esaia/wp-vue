@@ -21,34 +21,38 @@ const { user } = useAuth();
 const modalName = ref<AuthModalNames>("");
 </script>
 <template>
-    <div
-        class="container-fluid mx-auto flex w-full items-center justify-between p-6"
-    >
-        <div class="flex-1">LOGO</div>
-        <div class="flex flex-1 items-center justify-center space-x-10 text-lg">
-            <Link
-                v-for="link in menu"
-                :key="link.title"
-                :href="link.url"
-                class="hover:underline"
+    <div class="fixed top-0 z-30 w-full border-b bg-white/90 backdrop-blur-xs">
+        <div
+            class="container-fluid flex items-center justify-between px-6 py-3"
+        >
+            <div class="flex-1">LOGO</div>
+            <div
+                class="flex flex-1 items-center justify-center space-x-10 text-lg"
             >
-                {{ link.title }}
-            </Link>
-        </div>
-        <div class="flex flex-1 items-center justify-end gap-4">
-            <Link :href="firstLessonRoute">
-                <Button title="Open course" size="sm" />
-            </Link>
+                <Link
+                    v-for="link in menu"
+                    :key="link.title"
+                    :href="link.url"
+                    class="hover:underline"
+                >
+                    {{ link.title }}
+                </Link>
+            </div>
+            <div class="flex flex-1 items-center justify-end gap-4">
+                <Link :href="firstLessonRoute">
+                    <Button title="Open course" size="sm" />
+                </Link>
 
-            <Button
-                v-if="!user"
-                title="Sign in"
-                severity="secondary"
-                size="sm"
-                @click="modalName = 'signIn'"
-            />
-        </div>
+                <Button
+                    v-if="!user"
+                    title="Sign in"
+                    severity="secondary"
+                    size="sm"
+                    @click="modalName = 'signIn'"
+                />
+            </div>
 
-        <AuthModals v-model:modal-name="modalName" />
+            <AuthModals v-model:modal-name="modalName" />
+        </div>
     </div>
 </template>

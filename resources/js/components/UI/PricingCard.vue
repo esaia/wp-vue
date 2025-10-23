@@ -12,13 +12,13 @@ const features = [
 ];
 </script>
 <template>
-    <div class="container-fluid mt-20">
-        <p class="title-md mb-6 text-center">
-            Code your idea fast, build your WP plugin today
-        </p>
+    <div id="pricing" class="container-fluid pt-20">
+        <p class="title-md mb-6 text-center">Build your WP plugin today</p>
 
         <div class="flex items-center justify-center">
-            <div class="w-fit max-w-[600px] space-y-6 bg-black p-16 text-white">
+            <div
+                class="w-fit max-w-[600px] space-y-6 bg-black p-16 text-white shadow"
+            >
                 <div>
                     <p class="mb-2 text-lg font-bold lg:text-4xl">
                         <span class="text-wp">WordPress</span> plugin

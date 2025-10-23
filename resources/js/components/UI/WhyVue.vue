@@ -11,7 +11,7 @@ const DATA = [
     {
         title: "Developer Productivity",
         content:
-            "Vue’s simple <span> syntax and clear documentation </span> reduce the learning curve, allowing faster development of plugin features compared to vanilla JavaScript or jquery.",
+            "Vue’s <span> simple syntax and clear documentation</span> reduce the learning curve, allowing faster development of plugin features compared to vanilla JavaScript or jquery.",
     },
     {
         title: "Scalability",
