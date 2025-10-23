@@ -32,14 +32,14 @@ const toggleItem = (index: number) => {
 };
 </script>
 <template>
-    <div class="container-fluid">
-        <h3 class="title-md mt-20 text-center">Frequently Asked Questions</h3>
+    <div id="faq" class="container-fluid pt-20">
+        <h3 class="title-md text-center">Frequently Asked Questions</h3>
 
         <div class="mt-10 flex flex-col items-center justify-center">
             <div
                 v-for="(item, index) in FAQ"
                 :key="index"
-                class="w-full max-w-[500px]"
+                class="w-full max-w-[600px]"
             >
                 <div
                     class="group flex cursor-pointer items-center justify-between gap-4 border-b border-gray-400 p-4"
