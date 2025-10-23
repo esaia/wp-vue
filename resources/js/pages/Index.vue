@@ -3,6 +3,7 @@ import Button from "@/components/form/Button.vue";
 import VueIcon from "@/components/icons/VueIcon.vue";
 import WordPressIcon from "@/components/icons/WordPressIcon.vue";
 import Header from "@/components/layout/Header.vue";
+import Faq from "@/components/UI/Faq.vue";
 import PricingCard from "@/components/UI/PricingCard.vue";
 
 defineProps<{
@@ -47,8 +48,10 @@ defineProps<{
             <Button title="Get instant access" severity="secondary" size="lg" />
         </div>
 
-        <!-- Pricing -->
-
         <PricingCard />
+
+        <Faq />
+
+        <div class="h-56"></div>
     </div>
 </template>
