@@ -11,6 +11,8 @@
 
 @theme {
     --color-primary: var(--color-amber-300);
+    --color-vue: #3fb984;
+    --color-wp: #20759b;
 }
 
 /* Fade transition styles */

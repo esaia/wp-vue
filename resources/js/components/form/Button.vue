@@ -3,7 +3,7 @@ withDefaults(
     defineProps<{
         title: string;
         severity?: "primary" | "secondary";
-        size?: "sm" | "md";
+        size?: "sm" | "md" | "lg";
         loading?: boolean;
     }>(),
     {
@@ -23,6 +23,7 @@ withDefaults(
             'cursor-default! bg-gray-500! text-white': loading,
             'px-4 py-2': size === 'sm',
             'px-8 py-4': size === 'md',
+            'px-10 py-6 text-xl!': size === 'lg',
         }"
         :disabled="loading"
     >

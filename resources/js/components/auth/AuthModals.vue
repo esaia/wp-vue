@@ -35,7 +35,9 @@ const handleCloseModal = () => {
             <Modal v-if="modalName === 'signIn'" @close="handleCloseModal">
                 <SignInForm @logged-in="handleCloseModal" />
                 <template #modal-bottom>
-                    <div class="mt-2 flex w-full justify-center gap-4">
+                    <div
+                        class="mt-2 flex w-full justify-center gap-4 bg-white/70"
+                    >
                         <span
                             class="cursor-pointer hover:underline"
                             @click="modalName = 'forgot'"
@@ -55,7 +57,9 @@ const handleCloseModal = () => {
             <Modal v-else-if="modalName === 'signUp'" @close="handleCloseModal">
                 <SignUpForm @registered="handleCloseModal" />
                 <template #modal-bottom>
-                    <div class="mt-2 flex w-full justify-center gap-4">
+                    <div
+                        class="mt-2 flex w-full justify-center gap-4 bg-white/70"
+                    >
                         <span
                             class="cursor-pointer hover:underline"
                             @click="modalName = 'forgot'"

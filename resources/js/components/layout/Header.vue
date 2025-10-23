@@ -21,9 +21,11 @@ const { user } = useAuth();
 const modalName = ref<AuthModalNames>("");
 </script>
 <template>
-    <div class="flex w-full items-center justify-between p-4">
-        <div>LOGO</div>
-        <div class="space-x-6">
+    <div
+        class="container-fluid mx-auto flex w-full items-center justify-between p-6"
+    >
+        <div class="flex-1">LOGO</div>
+        <div class="flex flex-1 items-center justify-center space-x-10 text-lg">
             <Link
                 v-for="link in menu"
                 :key="link.title"
@@ -33,7 +35,7 @@ const modalName = ref<AuthModalNames>("");
                 {{ link.title }}
             </Link>
         </div>
-        <div class="flex items-center gap-4">
+        <div class="flex flex-1 items-center justify-end gap-4">
             <Link :href="firstLessonRoute">
                 <Button title="Open course" size="sm" />
             </Link>
