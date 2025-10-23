@@ -6,11 +6,13 @@ import { AuthModalNames } from "@/types/interfaces";
 import ForgotPassForm from "@/components/auth/ForgotPassForm.vue";
 import ResetPasswordForm from "@/components/auth/ResetPasswordForm.vue";
 import { ref } from "vue";
+import Alert from "@/components/UI/Alert.vue";
 
 const modalName = defineModel<AuthModalNames>("modalName");
 
 const params = new URLSearchParams(window.location.search);
 const token = ref(params.get("token"));
+const success = ref(params.get("success"));
 
 const handleCloseModal = () => {
     modalName.value = "";
@@ -19,10 +21,12 @@ const handleCloseModal = () => {
 
     params.delete("token");
     params.delete("email");
+    params.delete("success");
 
     const newUrl = window.location.pathname;
     history.replaceState(null, "", newUrl);
     token.value = "";
+    success.value = "";
 };
 </script>
 <template>
@@ -74,6 +78,18 @@ const handleCloseModal = () => {
 
             <Modal v-else-if="token" @close="handleCloseModal">
                 <ResetPasswordForm @password-resetted="modalName = 'signIn'" />
+            </Modal>
+
+            <Modal
+                v-else-if="success === 'email_verified'"
+                @close="handleCloseModal"
+            >
+                <div class="mt-20">
+                    <Alert
+                        title="Email Verified!"
+                        teaser="Your email address has been confirmed. Enjoy full access to all features."
+                    />
+                </div>
             </Modal>
         </Transition>
     </Teleport>

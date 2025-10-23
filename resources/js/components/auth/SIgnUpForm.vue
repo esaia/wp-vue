@@ -20,10 +20,10 @@ const emit = defineEmits<{
 }>();
 
 const form = useForm({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: "member",
+    email: "member@gmail.com",
+    password: "123123123",
+    confirmPassword: "123123123",
 });
 
 const rules = computed(() => {

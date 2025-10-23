@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Inertia\Inertia;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,9 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
 
-        User::create($validated);
+        $user = User::create($validated);
+
+        event(new Registered($user));
 
         return redirect()->back();
     }
@@ -43,6 +46,17 @@ class AuthController extends Controller
 
         // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            // Check if email is verified
+            if (!$user->hasVerifiedEmail()) {
+                Auth::logout();
+
+                return back()->withErrors([
+                    'email' => 'You must verify your email address before logging in.',
+                ])->onlyInput('email');
+            }
+
             $course = Course::first();
 
             return redirect()->route('lesson.show', [
@@ -56,7 +70,6 @@ class AuthController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-
 
     // Send the password reset link email
     public function sendResetLinkEmail(Request $request)

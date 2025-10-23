@@ -40,7 +40,7 @@ onUnmounted(() => {
             </div>
 
             <div
-                class="absolute top-2 right-2 cursor-pointer rounded-full p-2 duration-300"
+                class="absolute top-2 right-2 cursor-pointer rounded-full p-2 duration-300 md:top-8 md:right-8"
                 @click="emit('close')"
             >
                 <Button title="X" size="sm" />

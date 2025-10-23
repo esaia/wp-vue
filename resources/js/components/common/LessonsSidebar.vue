@@ -33,7 +33,7 @@ const handleLogout = () => {
 <template>
     <div class="flex max-w-[270px] flex-col justify-between border-r">
         <div
-            class="h-[calc(100vh-64px-80px)] overflow-y-auto p-6"
+            class="h-[calc(100vh-64px-136px)] overflow-y-auto p-6"
             :class="{ 'h-[calc(100vh-64px)]!': !user }"
         >
             <div v-for="chapter in course.chapters" :key="chapter.id">
@@ -69,8 +69,15 @@ const handleLogout = () => {
             </div>
         </div>
 
-        <div v-if="user" class="h-20 px-6">
-            <Button title="Log out" @click="handleLogout" />
+        <div v-if="user" class="h-34">
+            <div
+                class="bg-primary/20 flex h-full flex-col items-center justify-between gap-2 px-6 py-4"
+            >
+                <span class="p-2 italic">
+                    {{ user.email }}
+                </span>
+                <Button title="Log out" @click="handleLogout" />
+            </div>
         </div>
     </div>
 </template>
