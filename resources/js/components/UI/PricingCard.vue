@@ -12,8 +12,8 @@ const features = [
 ];
 </script>
 <template>
-    <div class="container-fluid mx-auto mt-20">
-        <p class="mb-6 text-center text-4xl font-black">
+    <div class="container-fluid mt-20">
+        <p class="title-md mb-6 text-center">
             Code your idea fast, build your WP plugin today
         </p>
 
@@ -64,7 +64,7 @@ const features = [
                 </div>
 
                 <div>
-                    <Button title="Buy course" class="w-full" />
+                    <Button title="Buy course" class="w-full" white-shadow />
 
                     <p class="mt-4 text-center text-gray-400">
                         Access forever (no subscription)

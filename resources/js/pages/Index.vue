@@ -5,6 +5,7 @@ import WordPressIcon from "@/components/icons/WordPressIcon.vue";
 import Header from "@/components/layout/Header.vue";
 import Faq from "@/components/UI/Faq.vue";
 import PricingCard from "@/components/UI/PricingCard.vue";
+import WhyVue from "@/components/UI/WhyVue.vue";
 
 defineProps<{
     firstLessonRoute: string;
@@ -12,7 +13,7 @@ defineProps<{
 </script>
 
 <template>
-    <div class="mx-auto min-h-screen">
+    <div class="min-h-screen">
         <Header :first-lesson-route="firstLessonRoute" />
 
         <!-- Header banner -->
@@ -47,6 +48,8 @@ defineProps<{
 
             <Button title="Get instant access" severity="secondary" size="lg" />
         </div>
+
+        <WhyVue />
 
         <PricingCard />
 
