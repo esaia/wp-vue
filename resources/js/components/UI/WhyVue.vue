@@ -6,7 +6,7 @@ const DATA = [
     {
         title: "Vue.js vs Jquery",
         content:
-            "jQuery requires manual DOM manipulation while Vue.js Uses a <span>  virtual DOM</span>. It Offers reactive, two-way data binding, automatically updating the DOM when data changes, reducing manual manipulation and improving efficiency.",
+            "jQuery requires manual DOM manipulation while Vue.js uses a <span>  virtual DOM</span>. It offers reactive, two-way data binding, automatically updating the DOM when data changes, reducing manual manipulation and improving efficiency.",
     },
     {
         title: "Developer Productivity",

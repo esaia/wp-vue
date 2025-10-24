@@ -50,7 +50,8 @@
 
             <p>
                 Today, I earn <span> passive income</span> from that plugin, and
-                if I can do it, you can too.
+                if I can do it, you can too. I made this course to share my
+                experience.
             </p>
 
             <img
@@ -71,12 +72,77 @@
                 course.
             </p>
 
+            <p>
+                This course will give you the knowledge to build
+                <span>any plugin you want.</span> What you'll need next is
+                simply a <span>good idea.</span> I'll show you the exact
+                blueprint I used to develop my successful
+                <a href="http://www.ireplugin.com" target="_blank">
+                    interactive real estate
+                </a>
+                plugin. You'll finish with a ready-to-customize boilerplate,
+                allowing you to launch your own plugins faster than ever by
+                reusing proven code. The only limit is
+                <span>your creativity!</span>
+            </p>
+
             <p>Don't wait—start learning today!</p>
 
             <p>Because after this course, you will say:</p>
 
             <img
                 src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWg0OWxsZWV1cm4xNHk1dXlvZ3o0dnIxaGlmYWx0Ynd0ZHo0dzU1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i21tixUQEE7TEqwmYa/giphy.gif"
+                class="mx-auto shadow"
+            />
+
+            <h3 class="title-md">What we will build</h3>
+
+            <p>
+                In this course, we'll build a powerful, professional-grade
+                slider plugin from the ground up. You'll create a fully-featured
+                admin area where you can manage all your sliders with ease,
+                including a dedicated table with pagination and full CRUD
+                (Create, Read, Update, Delete) operations.
+            </p>
+
+            <p>
+                Inside the slider configuration, you'll implement a rich suite
+                of features:
+            </p>
+
+            <ul class="space-y-3 text-left">
+                <li>
+                    <b>- Drag & Drop Ordering:</b> Intuitively arrange your
+                    slides.
+                </li>
+                <li>
+                    <b>- Dynamic Animations:</b> Choose from effects like Fade,
+                    Cube, Flip, Coverflow, and more.
+                </li>
+                <li>
+                    <b>- Full Customization:</b> Control spacing, direction
+                    (vertical/horizontal), and modules like Autoplay,
+                    Navigation, and Pagination.
+                </li>
+            </ul>
+
+            <p>
+                On the front-end, we'll leverage the powerful
+                <span>Swiper.js package</span>
+                to bring our sliders to life. You'll learn to create a dynamic
+                shortcode that renders a unique slider based on its
+                configuration, giving you total creative freedom.
+            </p>
+
+            <img
+                src="/images/slider-pro.webp"
+                alt="slider pro wordpress plugin"
+                class="shadow"
+            />
+
+            <img
+                src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMW0yYnFjMTYyajVpcm0wOXh6ZWF6azR1MDByaHBlaHhsa294bnVuZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UTEmxuHdg3pLfjXrOC/giphy.gif"
+                alt="slider pro plugin"
                 class="mx-auto shadow"
             />
         </div>

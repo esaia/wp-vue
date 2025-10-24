@@ -28,12 +28,12 @@ import WordPressIcon from "@/components/icons/WordPressIcon.vue";
             </h1>
 
             <p
-                class="mx-auto max-w-4xl text-lg leading-relaxed text-gray-700 lg:text-xl lg:leading-relaxed"
+                class="mx-auto max-w-4xl text-lg leading-relaxed text-gray-600 lg:text-2xl lg:leading-relaxed"
             >
                 Building a WordPress plugin doesn't have to be overwhelming. In
                 this guide, I'll show you how to leverage Vue.js to create
                 powerful, dynamic plugins in a fraction of the time it typically
-                takes Learn the essential tools, workflows, and best practices
+                takes. Learn the essential tools, workflows, and best practices
                 to accelerate your WordPress development and bring your plugin
                 ideas to life.
             </p>

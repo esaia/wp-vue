@@ -19,7 +19,7 @@ Route::controller(AuthController::class)->group(function () {
 
     // Password reset
     Route::name('password.')->group(function () {
-        Route::post('/password/forgot', 'sendResetLinkEmail')->name('email');
+        Route::post('/password/forgot', 'sendResetLinkEmail')->middleware('guest')->name('email');
         Route::get('/password/reset/{token}', 'showResetPasswordForm')->name('reset');
         Route::post('/password/reset', 'resetPassword')->name('update');
     });
