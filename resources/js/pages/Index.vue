@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Footer from "@/components/layout/Footer.vue";
 import Header from "@/components/layout/Header.vue";
 import Faq from "@/components/UI/Faq.vue";
 import MainBanner from "@/components/UI/MainBanner.vue";
@@ -30,6 +31,6 @@ defineProps<{
 
         <Faq />
 
-        <div class="h-56"></div>
+        <Footer />
     </div>
 </template>

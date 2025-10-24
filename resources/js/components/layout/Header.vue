@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { Link } from "@inertiajs/vue3";
+import { ref } from "vue";
 import Button from "@/components/form/Button.vue";
 import { useAuth } from "@/composables/useAuth";
 import AuthModals from "@/components/auth/AuthModals.vue";
-import { ref } from "vue";
+import Logo from "@/components/common/Logo.vue";
 import { AuthModalNames } from "@/types/interfaces";
+import { Link } from "@inertiajs/vue3";
 
 defineProps<{
     firstLessonRoute: string;
@@ -25,7 +26,8 @@ const modalName = ref<AuthModalNames>("");
         <div
             class="container-fluid flex items-center justify-between px-6 py-3"
         >
-            <div class="flex-1">LOGO</div>
+            <Logo class="flex-1" />
+
             <div
                 class="flex flex-1 items-center justify-center space-x-10 text-lg"
             >
@@ -33,7 +35,7 @@ const modalName = ref<AuthModalNames>("");
                     v-for="link in menu"
                     :key="link.title"
                     :href="link.url"
-                    class="hover:underline"
+                    class="hover:text-amber-600 hover:underline"
                 >
                     {{ link.title }}
                 </Link>
