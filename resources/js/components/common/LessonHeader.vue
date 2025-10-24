@@ -35,8 +35,8 @@ const handleLogout = () => {
 };
 </script>
 <template>
-    <div class="flex h-16 items-center justify-between border-b p-3">
-        <div class="flex items-center gap-4">
+    <div class="flex h-16 items-center justify-between border-b px-3">
+        <div class="flex items-center gap-4 text-sm">
             <Link :href="route('home')">
                 <Logo />
             </Link>
@@ -56,7 +56,7 @@ const handleLogout = () => {
 
         <div
             v-else
-            class="relative flex cursor-pointer items-center gap-4 border-l pl-4"
+            class="relative flex h-full cursor-pointer items-center gap-4 border-l pl-4"
             @click="showAccModal = !showAccModal"
         >
             <div
@@ -65,14 +65,14 @@ const handleLogout = () => {
                 {{ user.name[0].toUpperCase() }}
             </div>
 
-            <span> Account </span>
+            <span class="select-none"> Account </span>
 
             <ArrowIcon :class="{ 'rotate-180': showAccModal }" />
 
             <Transition name="fade">
                 <div
                     v-if="showAccModal"
-                    class="absolute top-[calc(100%+10px)] right-0 min-w-full border bg-white p-6 shadow"
+                    class="absolute top-[calc(100%-10px)] right-0 min-w-full cursor-default border bg-white p-6 shadow"
                     @click.stop=""
                 >
                     <p class="mb-4">{{ user.email }}</p>

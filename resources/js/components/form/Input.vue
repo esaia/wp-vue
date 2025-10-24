@@ -48,7 +48,7 @@ const inputType = computed(() => {
 
 <template>
     <label class="w-full cursor-auto!">
-        <p v-if="label" class="mb-2 text-sm">
+        <p v-if="label" class="mb-1 text-sm">
             {{ label }} <span v-if="required" class="text-red-600">*</span>
         </p>
 
