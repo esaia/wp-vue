@@ -99,7 +99,7 @@ const toggleItem = (index: number) => {
                             'border-b border-gray-400': openItems[index],
                         }"
                     >
-                        <div v-html="item.answer"></div>
+                        <div v-html="item.answer" class="text-gray-900"></div>
                     </div>
                 </Vue3SlideUpDown>
             </div>

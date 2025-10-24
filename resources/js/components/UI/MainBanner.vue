@@ -2,6 +2,7 @@
 import Button from "@/components/form/Button.vue";
 import VueIcon from "@/components/icons/VueIcon.vue";
 import WordPressIcon from "@/components/icons/WordPressIcon.vue";
+import { Link } from "@inertiajs/vue3";
 </script>
 <template>
     <div class="container-fluid">
@@ -38,7 +39,13 @@ import WordPressIcon from "@/components/icons/WordPressIcon.vue";
                 ideas to life.
             </p>
 
-            <Button title="Get instant access" severity="secondary" size="lg" />
+            <Link href="#pricing">
+                <Button
+                    title="Get instant access"
+                    severity="secondary"
+                    size="lg"
+                />
+            </Link>
         </div>
     </div>
 </template>

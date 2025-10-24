@@ -15,7 +15,15 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
     Route::post('/signup', 'register')->name('signup');
     Route::post('/logout', 'destroy')->name('logout');
-    Route::get('/email/verify/{id}/{hash}', 'verificationVerify')->middleware('signed')->name('verification.verify');
+
+    Route::get('/email/verify/{id}/{hash}', 'verificationVerify')
+        ->middleware('signed')
+        ->name('verification.verify');
+
+    Route::post('/email/verification-notification', 'resendEmailVerification')
+        ->middleware(['throttle:2,1'])
+        ->name('verification.send');
+
 
     // Password reset
     Route::name('password.')->group(function () {

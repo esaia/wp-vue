@@ -9,6 +9,7 @@ import useVuelidate from "@vuelidate/core";
 import { route } from "ziggy-js";
 import ErrorText from "@/components/form/ErrorText.vue";
 import AuthModalLayout from "@/components/layout/AuthModalLayout.vue";
+import Alert from "@/components/UI/Alert.vue";
 
 const emit = defineEmits<{
     (e: "loggedIn"): void;
@@ -30,6 +31,8 @@ const rules = computed(() => {
 });
 
 const error = ref("");
+const showResendVerification = ref(false);
+const notificationSent = ref(false);
 
 const v$ = useVuelidate(rules, form);
 
@@ -41,6 +44,21 @@ const getError = (field: string) => {
     );
 };
 
+const resendEmailVerification = () => {
+    if (form.processing) return;
+    form.post(route("verification.send"), {
+        onSuccess: () => {
+            notificationSent.value = true;
+            showResendVerification.value = false;
+            error.value = "";
+
+            setTimeout(() => {
+                notificationSent.value = false;
+            }, 10000);
+        },
+    });
+};
+
 const handleSubmitForm = async () => {
     error.value = "";
 
@@ -50,6 +68,10 @@ const handleSubmitForm = async () => {
 
     form.post(route("login"), {
         onError: (err) => {
+            if (err?.email_verify) {
+                showResendVerification.value = true;
+            }
+
             error.value = Object.values(err)?.[0] || LOGIN_ERROR;
         },
         onSuccess: () => {
@@ -77,7 +99,23 @@ const handleSubmitForm = async () => {
         />
 
         <div>
-            <ErrorText :error="error" />
+            <Alert
+                v-if="notificationSent"
+                title="Check Your Email"
+                teaser="A new verification link has been sent to your email address."
+            />
+
+            <div v-else class="flex flex-wrap items-center gap-x-2">
+                <ErrorText :error="error" class="mb-0!" />
+                <button
+                    v-if="showResendVerification"
+                    type="button"
+                    class="-translate-y-1 cursor-pointer hover:text-amber-500 hover:underline"
+                    @click="resendEmailVerification"
+                >
+                    {{ form.processing ? "resending..." : "resend" }}
+                </button>
+            </div>
 
             <div class="flex gap-3">
                 <Button

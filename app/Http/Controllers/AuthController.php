@@ -55,6 +55,7 @@ class AuthController extends Controller
 
                 return back()->withErrors([
                     'email' => 'You must verify your email address before logging in.',
+                    'email_verify' => true
                 ])->onlyInput('email');
             }
 
@@ -70,6 +71,18 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+
+    public function resendEmailVerification(LoginRequest $request)
+    {
+        $credentials = $request->validated();
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        $user->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
     }
 
     // Send the password reset link email

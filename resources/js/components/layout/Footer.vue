@@ -11,10 +11,14 @@ const FOOTER_LINKS = [
 </script>
 <template>
     <div class="mt-20 w-full border-t py-10">
-        <div class="container-fluid flex items-center justify-between">
+        <div
+            class="container-fluid flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center"
+        >
             <Logo />
 
-            <div class="space-x-8">
+            <div
+                class="flex flex-col items-start gap-8 lg:flex-row lg:items-center"
+            >
                 <Link
                     v-for="item in FOOTER_LINKS"
                     :key="item.title"
