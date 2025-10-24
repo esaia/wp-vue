@@ -6,7 +6,8 @@ import AuthModals from "@/components/auth/AuthModals.vue";
 import { useAuth } from "@/composables/useAuth";
 import Logo from "@/components/common/Logo.vue";
 import { route } from "ziggy-js";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
+import ArrowIcon from "@/components/icons/ArrowIcon.vue";
 
 defineProps<{
     course: Course;
@@ -16,6 +17,22 @@ defineProps<{
 const { user } = useAuth();
 
 const modalName = ref<AuthModalNames>("");
+const showAccModal = ref(false);
+
+const handleLogout = () => {
+    router.post(
+        route("logout"),
+        {},
+        {
+            onSuccess: () => {
+                router.visit("/");
+            },
+            onError: (errors) => {
+                console.error("Logout failed:", errors);
+            },
+        },
+    );
+};
 </script>
 <template>
     <div class="flex h-16 items-center justify-between border-b p-3">
@@ -36,6 +53,33 @@ const modalName = ref<AuthModalNames>("");
             size="sm"
             @click="modalName = 'signIn'"
         />
+
+        <div
+            v-else
+            class="relative flex cursor-pointer items-center gap-4 border-l pl-4"
+            @click="showAccModal = !showAccModal"
+        >
+            <div
+                class="bg-primary/90 flex aspect-square size-8 items-center justify-center rounded-full"
+            >
+                {{ user.name[0].toUpperCase() }}
+            </div>
+
+            <span> Account </span>
+
+            <ArrowIcon :class="{ 'rotate-180': showAccModal }" />
+
+            <Transition name="fade">
+                <div
+                    v-if="showAccModal"
+                    class="absolute top-[calc(100%+10px)] right-0 min-w-full border bg-white p-6 shadow"
+                    @click.stop=""
+                >
+                    <p class="mb-4">{{ user.email }}</p>
+                    <Button title="Log out" size="sm" @click="handleLogout" />
+                </div>
+            </Transition>
+        </div>
 
         <AuthModals v-model:modal-name="modalName" />
     </div>

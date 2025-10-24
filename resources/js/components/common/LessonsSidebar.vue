@@ -14,28 +14,10 @@ defineProps<{
 const page = usePage<Page>();
 
 const user = computed(() => page.props.auth.user);
-
-const handleLogout = () => {
-    router.post(
-        route("logout"),
-        {},
-        {
-            onSuccess: () => {
-                router.visit("/");
-            },
-            onError: (errors) => {
-                console.error("Logout failed:", errors);
-            },
-        },
-    );
-};
 </script>
 <template>
     <div class="flex max-w-[270px] flex-col justify-between border-r">
-        <div
-            class="h-[calc(100vh-64px-136px)] overflow-y-auto p-6"
-            :class="{ 'h-[calc(100vh-64px)]!': !user }"
-        >
+        <div class="h-[calc(100vh-64px)] overflow-y-auto p-6">
             <div v-for="chapter in course.chapters" :key="chapter.id">
                 <h4>{{ chapter.title }} ({{ chapter.lessons.length }})</h4>
 
@@ -66,17 +48,6 @@ const handleLogout = () => {
                         </div>
                     </li>
                 </ol>
-            </div>
-        </div>
-
-        <div v-if="user" class="h-34">
-            <div
-                class="bg-primary/20 flex h-full flex-col items-center justify-between gap-2 px-6 py-4"
-            >
-                <span class="p-2 italic">
-                    {{ user.email }}
-                </span>
-                <Button title="Log out" @click="handleLogout" />
             </div>
         </div>
     </div>

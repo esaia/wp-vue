@@ -3,7 +3,7 @@ import Logo from "@/components/common/Logo.vue";
 import { Link } from "@inertiajs/vue3";
 
 const FOOTER_LINKS = [
-    { title: "Reviews", url: "/#reviews" },
+    { title: "Story", url: "/#story" },
     { title: "Pricing", url: "/#pricing" },
     { title: "FAQ", url: "/#faq" },
     { title: "Interactive Real Estate", url: "http://www.ireplugin.com/" },

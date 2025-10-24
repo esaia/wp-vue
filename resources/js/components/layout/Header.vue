@@ -12,7 +12,7 @@ defineProps<{
 }>();
 
 const menu = [
-    { title: "Reviews", url: "/#reviews" },
+    { title: "Story", url: "/#story" },
     { title: "Pricing", url: "/#pricing" },
     { title: "FAQ", url: "/#faq" },
 ];

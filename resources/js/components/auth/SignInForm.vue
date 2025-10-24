@@ -61,6 +61,8 @@ const resendEmailVerification = () => {
 
 const handleSubmitForm = async () => {
     error.value = "";
+    showResendVerification.value = false;
+    notificationSent.value = false;
 
     await v$.value.$validate();
 

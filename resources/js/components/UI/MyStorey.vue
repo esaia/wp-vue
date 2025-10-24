@@ -1,8 +1,8 @@
 <script setup lang="ts"></script>
 <template>
-    <div class="container-fluid">
+    <div id="story" class="container-fluid pt-20">
         <div
-            class="mx-auto mt-20 max-w-2xl space-y-8 text-center text-xl [&_a]:text-blue-700 [&_a]:hover:underline [&_span]:bg-amber-100 [&_span]:underline"
+            class="mx-auto max-w-2xl space-y-8 text-center text-xl [&_a]:text-blue-700 [&_a]:hover:underline [&_span]:bg-amber-100 [&_span]:underline"
         >
             <!-- <h4 class="title-md">Who am I? and what's my story</h4> -->
 
