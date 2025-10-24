@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
@@ -67,5 +69,14 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     public function isMember(): bool
     {
         return $this->role === UserRole::MEMBER;
+    }
+
+
+    /**
+     * Get all course accesses for this user (including those mapped by email)
+     */
+    public function getAllCourseAccesses()
+    {
+        return CourseAccess::where('user_email', $this->email)->get();
     }
 }

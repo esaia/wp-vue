@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Course extends Model
 {
-    protected $fillable = ['title', 'description', 'slug', 'price'];
-
+    protected $fillable = ['title', 'description', 'product_id', 'slug', 'price'];
 
 
     public function chapters(): HasMany

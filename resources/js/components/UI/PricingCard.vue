@@ -3,6 +3,9 @@ import Button from "@/components/form/Button.vue";
 import SuccessIcon from "@/components/icons/SuccessIcon.vue";
 import VueIcon from "@/components/icons/VueIcon.vue";
 import WordPressIcon from "@/components/icons/WordPressIcon.vue";
+import { route } from "ziggy-js";
+import axios from "axios";
+import { ref } from "vue";
 
 const features = [
     "6 hours of video content",
@@ -10,6 +13,25 @@ const features = [
     "Private Discord community",
     "Lifetime updates",
 ];
+
+const loading = ref(false);
+
+const handlePay = async () => {
+    if (loading.value) return;
+    loading.value = true;
+    try {
+        const { data } = await axios.post(route("payment.process"));
+
+        if (data?.url) {
+            window.location.href = data.url;
+        }
+    } catch (error) {
+    } finally {
+        setTimeout(() => {
+            loading.value = false;
+        }, 2000);
+    }
+};
 </script>
 <template>
     <div id="pricing" class="container-fluid pt-32">
@@ -66,7 +88,12 @@ const features = [
                 </div>
 
                 <div>
-                    <Button title="Buy course" class="w-full" white-shadow />
+                    <Button
+                        title="Buy course"
+                        class="w-full"
+                        white-shadow
+                        @click="handlePay"
+                    />
 
                     <p class="mt-4 text-center text-gray-400">
                         Access forever (no subscription)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class LessonController extends Controller
@@ -19,9 +20,19 @@ class LessonController extends Controller
         $course->load('chapters');
         $lesson->load('chapter');
 
+        $user = Auth::user();
+
+        $hasCourseAccess = false;
+
+        if ($user) {
+            $courseAccesses = $user->getAllCourseAccesses();
+            $hasCourseAccess = $courseAccesses->contains('product_id', $course['product_id']);
+        }
+
         return Inertia::render('Lesson/Show', [
             'course' => $course,
             'currentLesson' => $lesson,
+            'hasCourseAccess' => $hasCourseAccess
         ]);
     }
 }

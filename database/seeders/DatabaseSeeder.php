@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $course = Course::create([
             'title' => 'WordPress Plugin Development with Vue.js',
             'description' => 'Learn to build WordPress plugins using Vue.js.',
+            'product_id' => "pdt_r6D1CcHzq9EnFJBhhnN9A",
             'slug' => 'wordpress-plugin-development-vuejs',
             'price' => 49.99,
         ]);
