@@ -54,18 +54,22 @@ const handlePay = async () => {
                         <span class="text-vue"> Vue.js</span>
                     </p>
 
-                    <p
-                        class="flex flex-col gap-2 text-gray-400 md:flex-row md:items-center"
+                    <div
+                        class="flex flex-col gap-2 md:flex-row md:items-center"
                     >
-                        Create
-                        <span class="text-primary underline">premium</span>
-                        WordPress plugins
+                        <p class="text-gray-400">
+                            Create
+                            <span class="text-primary inline underline">
+                                premium
+                            </span>
+                            WordPress plugins
+                        </p>
                         <span class="flex items-center gap-2 [&_svg]:size-10">
                             <WordPressIcon />
                             <span class="text-2xl">+</span>
                             <VueIcon />
                         </span>
-                    </p>
+                    </div>
                 </div>
 
                 <div class="flex items-end gap-3">

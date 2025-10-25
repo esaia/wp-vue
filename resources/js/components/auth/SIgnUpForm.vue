@@ -3,7 +3,13 @@ import Input from "@/components/form/Input.vue";
 import { computed, ref } from "vue";
 import Button from "@/components/form/Button.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
-import { email, helpers, required, sameAs } from "@vuelidate/validators";
+import {
+    email,
+    helpers,
+    minLength,
+    required,
+    sameAs,
+} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import { route } from "ziggy-js";
 import ErrorText from "@/components/form/ErrorText.vue";
@@ -13,6 +19,7 @@ import {
     PASSWORD_MATCH_MSG,
     REQUIRED_MSG,
     SERVER_ERROR,
+    SUCCESS_MESSAGE_TIMEOUT,
 } from "@/composables/constants";
 import Alert from "@/components/UI/Alert.vue";
 // @ts-ignore
@@ -34,6 +41,7 @@ const form = useForm({
 
 const error = ref("");
 const showSuccessMsg = ref(false);
+const turnstileKey = ref(0);
 
 const rules = computed(() => {
     return {
@@ -42,7 +50,10 @@ const rules = computed(() => {
             required: helpers.withMessage(REQUIRED_MSG, required),
             email: helpers.withMessage(EMAIL_MSG, email),
         },
-        password: { required: helpers.withMessage(REQUIRED_MSG, required) },
+        password: {
+            required: helpers.withMessage(REQUIRED_MSG, required),
+            min: minLength(8),
+        },
         confirmPassword: {
             required: helpers.withMessage(REQUIRED_MSG, required),
             sameAs: helpers.withMessage(
@@ -72,13 +83,14 @@ const handleSubmitForm = async () => {
 
     form.post(route("signup"), {
         onError: (err) => {
+            turnstileKey.value++;
             error.value = Object.values(err)?.[0] || SERVER_ERROR;
         },
         onSuccess: () => {
             showSuccessMsg.value = true;
             setTimeout(() => {
                 emit("registered");
-            }, 15000);
+            }, SUCCESS_MESSAGE_TIMEOUT);
         },
     });
 };
@@ -125,6 +137,7 @@ const handleSubmitForm = async () => {
 
             <!-- @ts-ignore -->
             <vue-turnstile
+                :key="turnstileKey"
                 :site-key="(turnstileSiteKey as string) || ''"
                 v-model="form.cfTurnstileResponse"
             />

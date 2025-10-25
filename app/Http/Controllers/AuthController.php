@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResetUserPasswordRequest;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
@@ -115,17 +116,14 @@ class AuthController extends Controller
     }
 
 
-    public function resetPassword(Request $request)
+    public function resetPassword(ResetUserPasswordRequest $request)
     {
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:8|confirmed:confirmPassword',
-        ]);
+        $attributes = $request->validated();
 
+        $attributes = collect($attributes)->only('email', 'password', 'token')->toArray();
 
         $status = Password::reset(
-            $request->only('email', 'password', 'token'),
+            $attributes,
             function ($user, $password) {
                 $user->forceFill([
                     'password' => bcrypt($password),

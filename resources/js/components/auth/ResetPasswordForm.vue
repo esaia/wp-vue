@@ -2,37 +2,50 @@
 import Input from "@/components/form/Input.vue";
 import { computed, ref } from "vue";
 import Button from "@/components/form/Button.vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import {
-    LOGIN_ERROR,
     PASSWORD_MATCH_MSG,
     REQUIRED_MSG,
+    SERVER_ERROR,
+    SUCCESS_MESSAGE_TIMEOUT,
 } from "@/composables/constants";
-import { helpers, required, sameAs } from "@vuelidate/validators";
+import { helpers, minLength, required, sameAs } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import { route } from "ziggy-js";
 import ErrorText from "@/components/form/ErrorText.vue";
 import AuthModalLayout from "@/components/layout/AuthModalLayout.vue";
 import Alert from "@/components/UI/Alert.vue";
+// @ts-ignore
+import VueTurnstile from "vue-turnstile";
 
 const emit = defineEmits<{
     (e: "passwordResetted"): void;
 }>();
 
+const turnstileSiteKey = usePage().props?.turnstileSiteKey || "";
+
 let params = new URLSearchParams(window.location.search);
 const token = params.get("token");
 const email = params.get("email");
+
+const turnstileKey = ref(0);
+const error = ref("");
+const isSuccess = ref(false);
 
 const form = useForm({
     token: token || "",
     email: email || "",
     password: "",
     confirmPassword: "",
+    cfTurnstileResponse: "",
 });
 
 const rules = computed(() => {
     return {
-        password: { required: helpers.withMessage(REQUIRED_MSG, required) },
+        password: {
+            required: helpers.withMessage(REQUIRED_MSG, required),
+            min: minLength(8),
+        },
         confirmPassword: {
             required: helpers.withMessage(REQUIRED_MSG, required),
             sameAs: helpers.withMessage(
@@ -42,9 +55,6 @@ const rules = computed(() => {
         },
     };
 });
-
-const error = ref("");
-const isSuccess = ref(false);
 
 const v$ = useVuelidate(rules, form);
 
@@ -65,13 +75,14 @@ const handleSubmitForm = async () => {
 
     form.post(route("password.update"), {
         onError: (err) => {
-            error.value = Object.values(err)?.[0] || LOGIN_ERROR;
+            turnstileKey.value++;
+            error.value = Object.values(err)?.[0] || SERVER_ERROR;
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
             isSuccess.value = true;
             setTimeout(() => {
                 emit("passwordResetted");
-            }, 5000);
+            }, SUCCESS_MESSAGE_TIMEOUT);
         },
     });
 };
@@ -83,11 +94,11 @@ const handleSubmitForm = async () => {
     >
         <Alert
             v-if="isSuccess"
-            title="Success!"
-            teaser="Your password has been successfully reset. Please sign in with your new password."
+            title="Password Reset Successful"
+            teaser="Your password has been updated. Please use your new password to sign in to your account."
         />
 
-        <div v-else class="space-y-5">
+        <template v-else>
             <Input
                 v-model="form.email"
                 type="email"
@@ -113,6 +124,13 @@ const handleSubmitForm = async () => {
                 :error="getError('confirmPassword')"
             />
 
+            <!-- @ts-ignore -->
+            <vue-turnstile
+                :key="turnstileKey"
+                :site-key="(turnstileSiteKey as string) || ''"
+                v-model="form.cfTurnstileResponse"
+            />
+
             <ErrorText :error="error" />
 
             <div class="flex gap-3">
@@ -123,6 +141,6 @@ const handleSubmitForm = async () => {
                     :loading="form.processing"
                 />
             </div>
-        </div>
+        </template>
     </AuthModalLayout>
 </template>

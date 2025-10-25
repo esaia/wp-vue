@@ -3,7 +3,12 @@ import Input from "@/components/form/Input.vue";
 import { computed, ref } from "vue";
 import Button from "@/components/form/Button.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
-import { EMAIL_MSG, REQUIRED_MSG, SERVER_ERROR } from "@/composables/constants";
+import {
+    EMAIL_MSG,
+    REQUIRED_MSG,
+    SERVER_ERROR,
+    SUCCESS_MESSAGE_TIMEOUT,
+} from "@/composables/constants";
 import { email, helpers, required } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import { route } from "ziggy-js";
@@ -63,7 +68,7 @@ const handleSubmitForm = async () => {
             isSuccess.value = true;
             setTimeout(() => {
                 emit("emailSent");
-            }, 15000);
+            }, SUCCESS_MESSAGE_TIMEOUT);
         },
     });
 };
