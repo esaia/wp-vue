@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             //
+            'turnstileSiteKey' => config('turnstile.sitekey'),
             'auth' => [
                 'user' => $request->user(),
             ],

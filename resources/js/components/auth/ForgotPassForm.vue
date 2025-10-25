@@ -2,7 +2,7 @@
 import Input from "@/components/form/Input.vue";
 import { computed, ref } from "vue";
 import Button from "@/components/form/Button.vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import { EMAIL_MSG, REQUIRED_MSG, SERVER_ERROR } from "@/composables/constants";
 import { email, helpers, required } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
@@ -10,6 +10,8 @@ import { route } from "ziggy-js";
 import ErrorText from "@/components/form/ErrorText.vue";
 import AuthModalLayout from "@/components/layout/AuthModalLayout.vue";
 import Alert from "@/components/UI/Alert.vue";
+// @ts-ignore
+import VueTurnstile from "vue-turnstile";
 
 const emit = defineEmits<{
     (e: "emailSent"): void;
@@ -17,7 +19,10 @@ const emit = defineEmits<{
 
 const form = useForm({
     email: "",
+    cfTurnstileResponse: "",
 });
+
+const turnstileSiteKey = usePage().props?.turnstileSiteKey || "";
 
 const rules = computed(() => {
     return {
@@ -56,7 +61,7 @@ const handleSubmitForm = async () => {
             isSuccess.value = true;
             setTimeout(() => {
                 emit("emailSent");
-            }, 10000);
+            }, 15000);
         },
     });
 };
@@ -76,6 +81,12 @@ const handleSubmitForm = async () => {
                 placeholder="john@example.com"
                 label="Email"
                 :error="getError('email')"
+            />
+
+            <!-- @ts-ignore -->
+            <vue-turnstile
+                :site-key="(turnstileSiteKey as string) || ''"
+                v-model="form.cfTurnstileResponse"
             />
 
             <div>

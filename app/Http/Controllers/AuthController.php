@@ -10,9 +10,9 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
-use Inertia\Inertia;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
+use NjoguAmos\Turnstile\Rules\TurnstileRule;
 
 class AuthController extends Controller
 {
@@ -88,7 +88,13 @@ class AuthController extends Controller
     // Send the password reset link email
     public function sendResetLinkEmail(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
+
+        $request->validate([
+            'email' => 'required|email',
+            'cfTurnstileResponse' => ['required', new TurnstileRule()],
+        ], [
+            'cfTurnstileResponse.required' => 'Cloudflare CAPTCHA validation failed.',
+        ]);
 
         $status = Password::sendResetLink(
             $request->only('email')

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use NjoguAmos\Turnstile\Rules\TurnstileRule;
 
 class RegisterRequest extends FormRequest
 {
@@ -18,6 +19,21 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed:confirmPassword',
+            'cfTurnstileResponse' => ['required', new TurnstileRule()],
+        ];
+    }
+
+
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'cfTurnstileResponse.required' => 'Cloudflare CAPTCHA validation failed.',
         ];
     }
 }

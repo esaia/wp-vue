@@ -2,7 +2,7 @@
 import Input from "@/components/form/Input.vue";
 import { computed, ref } from "vue";
 import Button from "@/components/form/Button.vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import { email, helpers, required, sameAs } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import { route } from "ziggy-js";
@@ -15,16 +15,21 @@ import {
     SERVER_ERROR,
 } from "@/composables/constants";
 import Alert from "@/components/UI/Alert.vue";
+// @ts-ignore
+import VueTurnstile from "vue-turnstile";
 
 const emit = defineEmits<{
     (e: "registered"): void;
 }>();
+
+const turnstileSiteKey = usePage().props?.turnstileSiteKey || "";
 
 const form = useForm({
     name: "member",
     email: "member@gmail.com",
     password: "123123123",
     confirmPassword: "123123123",
+    cfTurnstileResponse: "",
 });
 
 const error = ref("");
@@ -73,7 +78,7 @@ const handleSubmitForm = async () => {
             showSuccessMsg.value = true;
             setTimeout(() => {
                 emit("registered");
-            }, 8000);
+            }, 15000);
         },
     });
 };
@@ -116,6 +121,12 @@ const handleSubmitForm = async () => {
                 placeholder="Repeat Password"
                 label="Repeat password"
                 :error="getError('confirmPassword')"
+            />
+
+            <!-- @ts-ignore -->
+            <vue-turnstile
+                :site-key="(turnstileSiteKey as string) || ''"
+                v-model="form.cfTurnstileResponse"
             />
 
             <div>

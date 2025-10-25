@@ -108,18 +108,10 @@ const handleSubmitForm = async () => {
             />
 
             <div v-else class="flex flex-wrap items-center gap-x-2">
-                <ErrorText :error="error" class="mb-0!" />
-                <button
-                    v-if="showResendVerification"
-                    type="button"
-                    class="-translate-y-1 cursor-pointer hover:text-amber-500 hover:underline"
-                    @click="resendEmailVerification"
-                >
-                    {{ form.processing ? "resending..." : "resend" }}
-                </button>
+                <ErrorText :error="error" />
             </div>
 
-            <div class="flex gap-3">
+            <div class="flex justify-between gap-3">
                 <Button
                     title="Sign in"
                     severity="secondary"
@@ -127,6 +119,15 @@ const handleSubmitForm = async () => {
                     size="sm"
                     :loading="form.processing"
                 />
+
+                <button
+                    v-if="showResendVerification"
+                    type="button"
+                    class="cursor-pointer hover:text-amber-500 hover:underline"
+                    @click="resendEmailVerification"
+                >
+                    {{ form.processing ? "resending..." : "resend" }}
+                </button>
             </div>
         </div>
     </AuthModalLayout>

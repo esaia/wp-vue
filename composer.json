@@ -12,6 +12,7 @@
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "njoguamos/laravel-turnstile": "^3.2",
         "spatie/eloquent-sortable": "^4.5",
         "svix/svix": "^1.79",
         "tightenco/ziggy": "^2.6"
