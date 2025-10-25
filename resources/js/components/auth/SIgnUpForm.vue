@@ -14,6 +14,7 @@ import {
     REQUIRED_MSG,
     SERVER_ERROR,
 } from "@/composables/constants";
+import Alert from "@/components/UI/Alert.vue";
 
 const emit = defineEmits<{
     (e: "registered"): void;
@@ -25,6 +26,9 @@ const form = useForm({
     password: "123123123",
     confirmPassword: "123123123",
 });
+
+const error = ref("");
+const showSuccessMsg = ref(false);
 
 const rules = computed(() => {
     return {
@@ -43,8 +47,6 @@ const rules = computed(() => {
         },
     };
 });
-
-const error = ref("");
 
 const v$ = useVuelidate(rules, form);
 
@@ -67,56 +69,68 @@ const handleSubmitForm = async () => {
         onError: (err) => {
             error.value = Object.values(err)?.[0] || SERVER_ERROR;
         },
-        onSuccess: () => emit("registered"),
+        onSuccess: () => {
+            showSuccessMsg.value = true;
+            setTimeout(() => {
+                emit("registered");
+            }, 8000);
+        },
     });
 };
 </script>
 <template>
     <AuthModalLayout title="Sign up" @handle-submit="handleSubmitForm">
-        <Input
-            v-model="form.name"
-            type="text"
-            placeholder="JohnDoe"
-            label="Username"
-            :error="getError('name')"
+        <Alert
+            v-if="showSuccessMsg"
+            title="Welcome Aboard!"
+            :teaser="`We've sent a verification link to your email. Click it to activate your account. (${form.email})`"
         />
+        <template v-else>
+            <Input
+                v-model="form.name"
+                type="text"
+                placeholder="JohnDoe"
+                label="Username"
+                :error="getError('name')"
+            />
 
-        <Input
-            v-model="form.email"
-            type="email"
-            placeholder="john@example.com"
-            label="Email"
-            :error="getError('email')"
-        />
+            <Input
+                v-model="form.email"
+                type="email"
+                placeholder="john@example.com"
+                label="Email"
+                :error="getError('email')"
+            />
 
-        <Input
-            v-model="form.password"
-            type="password"
-            placeholder="Enter Password"
-            label="Password"
-            :error="getError('password')"
-        />
+            <Input
+                v-model="form.password"
+                type="password"
+                placeholder="Enter Password"
+                label="Password"
+                :error="getError('password')"
+            />
 
-        <Input
-            v-model="form.confirmPassword"
-            type="password"
-            placeholder="Repeat Password"
-            label="Repeat password"
-            :error="getError('confirmPassword')"
-        />
+            <Input
+                v-model="form.confirmPassword"
+                type="password"
+                placeholder="Repeat Password"
+                label="Repeat password"
+                :error="getError('confirmPassword')"
+            />
 
-        <div>
-            <ErrorText :error="error" />
+            <div>
+                <ErrorText :error="error" />
 
-            <div class="flex gap-3">
-                <Button
-                    title="Sign up"
-                    severity="secondary"
-                    class="w-fit"
-                    size="sm"
-                    :loading="form.processing"
-                />
+                <div class="flex gap-3">
+                    <Button
+                        title="Sign up"
+                        severity="secondary"
+                        class="w-fit"
+                        size="sm"
+                        :loading="form.processing"
+                    />
+                </div>
             </div>
-        </div>
+        </template>
     </AuthModalLayout>
 </template>

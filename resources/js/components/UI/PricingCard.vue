@@ -22,8 +22,8 @@ const handlePay = async () => {
     try {
         const { data } = await axios.post(route("payment.process"));
 
-        if (data?.url) {
-            window.location.href = data.url;
+        if (data?.data?.url) {
+            window.location.href = data.data.url;
         }
     } catch (error) {
     } finally {

@@ -10,6 +10,7 @@ import WhyVue from "@/components/UI/WhyVue.vue";
 
 defineProps<{
     firstLessonRoute: string;
+    hasCourseAccess: boolean;
 }>();
 </script>
 
@@ -27,7 +28,7 @@ defineProps<{
 
         <MyStorey />
 
-        <PricingCard />
+        <PricingCard v-if="!hasCourseAccess" />
 
         <Faq />
 

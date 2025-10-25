@@ -25,8 +25,7 @@ class LessonController extends Controller
         $hasCourseAccess = false;
 
         if ($user) {
-            $courseAccesses = $user->getAllCourseAccesses();
-            $hasCourseAccess = $courseAccesses->contains('product_id', $course['product_id']);
+            $hasCourseAccess =  $user->containsCourse($course['product_id']);
         }
 
         return Inertia::render('Lesson/Show', [

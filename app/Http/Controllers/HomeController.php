@@ -3,23 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\CourseAccess;
-use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {
     public function home()
     {
-        $course = Course::first();
+        $user = Auth::user();
+        $wpVueCourse = Course::first();
+
 
         $firstLessonRoute = route('lesson.show', [
-            'course' => $course->slug,
-            'lesson' => $course->chapters[0]->lessons[0]->id
+            'course' => $wpVueCourse->slug,
+            'lesson' => $wpVueCourse->chapters[0]->lessons[0]->id
         ]);
 
 
-        return Inertia::render('Index', compact('firstLessonRoute'));
+        $hasCourseAccess = $user ? $user->containsCourse($wpVueCourse->product_id) : false;
+
+
+        return Inertia::render('Index', compact('firstLessonRoute', 'hasCourseAccess'));
     }
 }
