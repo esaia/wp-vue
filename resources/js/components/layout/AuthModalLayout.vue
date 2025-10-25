@@ -11,9 +11,11 @@ defineProps<{
         class="flex flex-col space-y-5 md:p-8"
         @submit.prevent="emit('handleSubmit')"
     >
-        <h5 class="border-b-2 border-gray-300 pb-8 text-4xl font-bold">
-            {{ title }}
-        </h5>
+        <div class="border-b-2 border-gray-300 pb-8">
+            <h5 class="mr-20 text-4xl font-bold">
+                {{ title }}
+            </h5>
+        </div>
 
         <slot />
     </form>

@@ -46,11 +46,11 @@ const DATA = [
             class="mx-auto mt-10 grid max-w-7xl grid-cols-1 gap-10 text-left md:grid-cols-2"
         >
             <div v-for="item in DATA">
-                <p class="mb-2 text-lg font-semibold">{{ item.title }}</p>
+                <p class="mb-2 text-2xl font-semibold">{{ item.title }}</p>
 
                 <div
                     v-html="item.content"
-                    class="[&_span]:after:bg-primary [&_span]:relative [&_span]:after:absolute [&_span]:after:bottom-1/8 [&_span]:after:left-0 [&_span]:after:-z-10 [&_span]:after:h-2 [&_span]:after:w-full [&_span]:after:content-['']"
+                    class="[&_span]:after:bg-primary text-lg [&_span]:relative [&_span]:after:absolute [&_span]:after:bottom-1/8 [&_span]:after:left-0 [&_span]:after:-z-10 [&_span]:after:h-2 [&_span]:after:w-full [&_span]:after:content-['']"
                 />
             </div>
         </div>

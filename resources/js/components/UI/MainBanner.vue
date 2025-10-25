@@ -7,7 +7,7 @@ import { Link } from "@inertiajs/vue3";
 <template>
     <div class="container-fluid">
         <div
-            class="mx-auto flex max-w-5xl flex-col items-center justify-center gap-12 pt-20 text-center"
+            class="mx-auto flex max-w-5xl flex-col items-center justify-center gap-10 pt-8 text-center md:gap-12 lg:pt-20"
         >
             <span class="flex items-center gap-6 [&_svg]:size-20">
                 <WordPressIcon />

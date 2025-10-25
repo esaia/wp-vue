@@ -48,7 +48,7 @@ const FAQ = [
     },
     {
         question: "Is there a money-back guarantee?",
-        answer: "Yes! I offer 7 days money-back guarantee. I am confident in the value of the course and want you to enroll with complete peace of mind.",
+        answer: "Yes! I offer 7 days money-back guarantee.",
     },
     {
         question: "What should I know before I purchase?",

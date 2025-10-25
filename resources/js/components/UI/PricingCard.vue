@@ -57,7 +57,9 @@ const handlePay = async () => {
                     <p
                         class="flex flex-col gap-2 text-gray-400 md:flex-row md:items-center"
                     >
-                        Ship your ideas even faster
+                        Create
+                        <span class="text-primary underline">premium</span>
+                        WordPress plugins
                         <span class="flex items-center gap-2 [&_svg]:size-10">
                             <WordPressIcon />
                             <span class="text-2xl">+</span>
@@ -67,7 +69,11 @@ const handlePay = async () => {
                 </div>
 
                 <div class="flex items-end gap-3">
-                    <span class="text-gray-400 line-through">$199 </span>
+                    <span
+                        class="text-xl text-gray-400 line-through decoration-white/80"
+                    >
+                        $199
+                    </span>
                     <span
                         class="text-5xl font-extrabold tracking-tight text-gray-100"
                     >

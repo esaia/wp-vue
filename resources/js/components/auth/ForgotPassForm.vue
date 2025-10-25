@@ -24,6 +24,10 @@ const form = useForm({
 
 const turnstileSiteKey = usePage().props?.turnstileSiteKey || "";
 
+const error = ref("");
+const isSuccess = ref(false);
+const turnstileKey = ref(0);
+
 const rules = computed(() => {
     return {
         email: {
@@ -32,9 +36,6 @@ const rules = computed(() => {
         },
     };
 });
-
-const error = ref("");
-const isSuccess = ref(false);
 
 const v$ = useVuelidate(rules, form);
 
@@ -55,6 +56,7 @@ const handleSubmitForm = async () => {
 
     form.post(route("password.email"), {
         onError: (err) => {
+            turnstileKey.value++;
             error.value = Object.values(err)?.[0] || SERVER_ERROR;
         },
         onSuccess: (data) => {
@@ -85,6 +87,7 @@ const handleSubmitForm = async () => {
 
             <!-- @ts-ignore -->
             <vue-turnstile
+                :key="turnstileKey"
                 :site-key="(turnstileSiteKey as string) || ''"
                 v-model="form.cfTurnstileResponse"
             />
