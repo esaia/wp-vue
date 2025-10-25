@@ -35,7 +35,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-
-Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
-
-Route::post('/webhook/dodopayments', [PaymentController::class, 'webhook'])->name('webhook.dodopayments');
+Route::controller(PaymentController::class)->group(function () {
+    Route::post('/payment/process', 'processPayment')->name('payment.process');
+    Route::post('/webhook/dodopayments', 'webhook')->name('webhook.dodopayments');
+});

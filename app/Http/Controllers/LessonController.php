@@ -22,11 +22,7 @@ class LessonController extends Controller
 
         $user = Auth::user();
 
-        $hasCourseAccess = false;
-
-        if ($user) {
-            $hasCourseAccess =  $user->containsCourse($course['product_id']);
-        }
+        $hasCourseAccess = $user ? $user->containsCourse($course['product_id']) : false;
 
         return Inertia::render('Lesson/Show', [
             'course' => $course,

@@ -8,9 +8,6 @@ const props = defineProps<{
     currentLesson: Lesson;
     hasCourseAccess: any;
 }>();
-
-console.log(props.course);
-console.log(props.hasCourseAccess);
 </script>
 
 <template>
@@ -25,6 +22,9 @@ console.log(props.hasCourseAccess);
                     <h1 class="text-3xl">{{ currentLesson.title }}</h1>
 
                     has access: {{ hasCourseAccess }}
+
+                    <p>You don't have access to see this lesson</p>
+                    <button>Buy course</button>
                 </div>
             </div>
         </div>
