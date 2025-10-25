@@ -99,10 +99,10 @@
 
             <p>
                 In this course, we'll build a powerful, professional-grade
-                slider plugin from the ground up. You'll create a fully-featured
-                admin area where you can manage all your sliders with ease,
-                including a dedicated table with pagination and full CRUD
-                (Create, Read, Update, Delete) operations.
+                slider pro plugin from the ground up. You'll create a
+                fully-featured admin area where you can manage all your sliders
+                with ease, including a dedicated table with pagination and full
+                CRUD (Create, Read, Update, Delete) operations.
             </p>
 
             <p>

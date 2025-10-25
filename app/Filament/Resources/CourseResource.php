@@ -19,6 +19,8 @@ class CourseResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
+    protected static ?string $navigationGroup = 'Courses management';
+
     public static function getNavigationSort(): ?int
     {
         return 1;

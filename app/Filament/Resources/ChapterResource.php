@@ -19,6 +19,9 @@ class ChapterResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
+    protected static ?string $navigationGroup = 'Courses management';
+
+
     public static function getNavigationSort(): ?int
     {
         return 2;

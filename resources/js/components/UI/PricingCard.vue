@@ -7,8 +7,12 @@ import { route } from "ziggy-js";
 import axios from "axios";
 import { ref } from "vue";
 
+defineProps<{
+    hasCourseAccess: boolean;
+}>();
+
 const features = [
-    "6 hours of video content",
+    "6.5 hours of video content",
     "Support from instructor",
     "Private Discord community",
     "Lifetime updates",
@@ -41,16 +45,18 @@ const handlePay = async () => {
 
         <div class="flex items-center justify-center">
             <div
-                class="w-fit max-w-[600px] space-y-6 bg-black p-16 text-white shadow"
+                class="w-fit max-w-[600px] space-y-6 bg-black p-8 text-white shadow md:p-16"
             >
                 <div>
-                    <p class="mb-2 text-lg font-bold lg:text-4xl">
+                    <p class="mb-2 text-2xl font-bold lg:text-4xl">
                         <span class="text-wp">WordPress</span> plugin
                         development with
                         <span class="text-vue"> Vue.js</span>
                     </p>
 
-                    <p class="flex items-center gap-2 text-gray-400">
+                    <p
+                        class="flex flex-col gap-2 text-gray-400 md:flex-row md:items-center"
+                    >
                         Ship your ideas even faster
                         <span class="flex items-center gap-2 [&_svg]:size-10">
                             <WordPressIcon />
@@ -89,9 +95,14 @@ const handlePay = async () => {
 
                 <div>
                     <Button
-                        title="Buy course"
+                        :title="
+                            hasCourseAccess
+                                ? 'You have already purchased'
+                                : 'Buy course'
+                        "
                         class="w-full"
                         white-shadow
+                        :loading="hasCourseAccess"
                         @click="handlePay"
                     />
 

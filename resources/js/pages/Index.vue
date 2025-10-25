@@ -28,7 +28,7 @@ defineProps<{
 
         <MyStorey />
 
-        <PricingCard v-if="!hasCourseAccess" />
+        <PricingCard :has-course-access="hasCourseAccess" />
 
         <Faq />
 
